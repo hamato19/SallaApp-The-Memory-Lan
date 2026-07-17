@@ -1,111 +1,111 @@
 {
-  "version": "1.0.0",
-  "theme_name": "The Memory Lane",
-  "repo_url": "رابط مستودع الثيم",
-  "support_url": "رابط صفحة الدعم",
-  "description": {
-    "ar": "ثيم عطور يجمع بين الأناقة الكلاسيكية وإحساس الحنين، مصمم لتجربة تسوق فاخرة",
-    "en": "A perfume theme blending classic elegance with nostalgia, designed for a luxury shopping experience"
-  },
-  "settings": [
-    {
-      "type": "boolean",
-      "label": "شريط علوي داكن",
-      "id": "topnav_is_dark",
-      "format": "switch",
-      "selected": false
-    },
-    {
-      "type": "boolean",
-      "label": "تفعيل وضع الذكريات",
-      "id": "enable_memory_mode",
-      "format": "switch",
-      "selected": true,
-      "description": "يعرض عناصر بصرية مستوحاة من الطابع الكلاسيكي"
-    },
-    {
-      "id": "primary_color",
-      "type": "color",
-      "label": "اللون الأساسي للثيم",
-      "format": "color",
-      "value": "#8B7355"
-    },
-    {
-      "id": "placeholder_image",
-      "type": "string",
-      "format": "hidden",
-      "value": "images/placeholder.png"
-    }
-  ],
-  "features": [
-    "mega-menu",
-    "fonts",
-    "color",
-    "breadcrumb",
-    "ajax-add-to-cart",
-    "product-gallery",
-    "component-featured-products",
-    "component-products-slider",
-    "component-photos-slider",
-    "component-parallax-background",
-    "component-testimonials",
-    "component-store-features",
-    "filters"
-  ],
-  "components": [
-    {
-      "title": {
-        "ar": "عارض الذكريات",
-        "en": "Memory Showcase"
-      },
-      "icon": "sicon-image-carousel",
-      "path": "home.memory-showcase",
-      "fields": [
-        {
-          "type": "static",
-          "format": "description",
-          "id": "component-preview",
-          "value": "<div><img class='w-full' src='رابط صورة معاينة المكون'></div>"
-        },
-        {
-          "id": "slides",
-          "type": "collection",
-          "format": "collection",
-          "required": true,
-          "minLength": 1,
-          "maxLength": 10,
-          "label": "شرائح الذكريات",
-          "item_label": "شريحة",
-          "fields": [
-            {
-              "type": "string",
-              "id": "slides.image",
-              "label": "صورة الخلفية",
-              "format": "image",
-              "required": true,
-              "description": "* المقاس المناسب هو 900×600 بكسل"
-            },
-            {
-              "type": "string",
-              "id": "slides.title",
-              "label": "عنوان الذكرى",
-              "format": "text",
-              "multilanguage": true,
-              "placeholder": "مثلاً: ذكريات الخريف",
-              "maxLength": 100
-            },
-            {
-              "type": "string",
-              "id": "slides.description",
-              "label": "وصف الذكرى",
-              "format": "textarea",
-              "multilanguage": true,
-              "placeholder": "حكاية عطر تعيد لك أجمل اللحظات...",
-              "maxLength": 255
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
+    "version": "1.0.0",
+      "theme_name": "The Memory Lane",
+        "repo_url": "رابط مستودع الثيم",
+          "support_url": "رابط صفحة الدعم",
+            "description": {
+                "ar": "ثيم عطور يجمع بين الأناقة الكلاسيكية وإحساس الحنين، مصمم لتجربة تسوق فاخرة",
+                    "en": "A perfume theme blending classic elegance with nostalgia, designed for a luxury shopping experience"
+                      },
+                        "settings": [
+                            {
+                                  "type": "boolean",
+                                        "label": "شريط علوي داكن",
+                                              "id": "topnav_is_dark",
+                                                    "format": "switch",
+                                                          "selected": false
+                                                              },
+                                                                  {
+                                                                        "type": "boolean",
+                                                                              "label": "تفعيل وضع الذكريات",
+                                                                                    "id": "enable_memory_mode",
+                                                                                          "format": "switch",
+                                                                                                "selected": true,
+                                                                                                      "description": "يعرض عناصر بصرية مستوحاة من الطابع الكلاسيكي"
+                                                                                                          },
+                                                                                                              {
+                                                                                                                    "id": "primary_color",
+                                                                                                                          "type": "color",
+                                                                                                                                "label": "اللون الأساسي للثيم",
+                                                                                                                                      "format": "color",
+                                                                                                                                            "value": "#8B7355"
+                                                                                                                                                },
+                                                                                                                                                    {
+                                                                                                                                                          "id": "placeholder_image",
+                                                                                                                                                                "type": "string",
+                                                                                                                                                                      "format": "hidden",
+                                                                                                                                                                            "value": "images/placeholder.png"
+                                                                                                                                                                                }
+                                                                                                                                                                                  ],
+                                                                                                                                                                                    "features": [
+                                                                                                                                                                                        "mega-menu",
+                                                                                                                                                                                            "fonts",
+                                                                                                                                                                                                "color",
+                                                                                                                                                                                                    "breadcrumb",
+                                                                                                                                                                                                        "ajax-add-to-cart",
+                                                                                                                                                                                                            "product-gallery",
+                                                                                                                                                                                                                "component-featured-products",
+                                                                                                                                                                                                                    "component-products-slider",
+                                                                                                                                                                                                                        "component-photos-slider",
+                                                                                                                                                                                                                            "component-parallax-background",
+                                                                                                                                                                                                                                "component-testimonials",
+                                                                                                                                                                                                                                    "component-store-features",
+                                                                                                                                                                                                                                        "filters"
+                                                                                                                                                                                                                                          ],
+                                                                                                                                                                                                                                            "components": [
+                                                                                                                                                                                                                                                {
+                                                                                                                                                                                                                                                      "title": {
+                                                                                                                                                                                                                                                              "ar": "عارض الذكريات",
+                                                                                                                                                                                                                                                                      "en": "Memory Showcase"
+                                                                                                                                                                                                                                                                            },
+                                                                                                                                                                                                                                                                                  "icon": "sicon-image-carousel",
+                                                                                                                                                                                                                                                                                        "path": "home.memory-showcase",
+                                                                                                                                                                                                                                                                                              "fields": [
+                                                                                                                                                                                                                                                                                                      {
+                                                                                                                                                                                                                                                                                                                "type": "static",
+                                                                                                                                                                                                                                                                                                                          "format": "description",
+                                                                                                                                                                                                                                                                                                                                    "id": "component-preview",
+                                                                                                                                                                                                                                                                                                                                              "value": "<div><img class='w-full' src='رابط صورة معاينة المكون'></div>"
+                                                                                                                                                                                                                                                                                                                                                      },
+                                                                                                                                                                                                                                                                                                                                                              {
+                                                                                                                                                                                                                                                                                                                                                                        "id": "slides",
+                                                                                                                                                                                                                                                                                                                                                                                  "type": "collection",
+                                                                                                                                                                                                                                                                                                                                                                                            "format": "collection",
+                                                                                                                                                                                                                                                                                                                                                                                                      "required": true,
+                                                                                                                                                                                                                                                                                                                                                                                                                "minLength": 1,
+                                                                                                                                                                                                                                                                                                                                                                                                                          "maxLength": 10,
+                                                                                                                                                                                                                                                                                                                                                                                                                                    "label": "شرائح الذكريات",
+                                                                                                                                                                                                                                                                                                                                                                                                                                              "item_label": "شريحة",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                        "fields": [
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                    {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  "type": "string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "id": "slides.image",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              "label": "صورة الخلفية",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "format": "image",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          "required": true,
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        "description": "* المقاس المناسب هو 900×600 بكسل"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    },
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              "type": "string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "id": "slides.title",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          "label": "عنوان الذكرى",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        "format": "text",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      "multilanguage": true,
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    "placeholder": "مثلاً: ذكريات الخريف",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  "maxLength": 100
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              },
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        "type": "string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      "id": "slides.description",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    "label": "وصف الذكرى",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  "format": "textarea",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                "multilanguage": true,
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              "placeholder": "حكاية عطر تعيد لك أجمل اللحظات...",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            "maxLength": 255
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ]
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ]
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ]
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      }
