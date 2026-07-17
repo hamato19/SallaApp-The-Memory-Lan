@@ -1,0 +1,33 @@
+/* assets/css/style.css */
+
+/* 1. ضبط الخط العام (يمكنك استخدام خطوط سلة المعتمدة) */
+body {
+    font-family: 'Tajawal', sans-serif;
+    color: #2d2d2d;
+    line-height: 1.6;
+}
+
+/* 2. تنسيق بطاقات الذكريات */
+.memory-card {
+    background: #ffffff;
+    border: 1px solid rgba(212, 175, 55, 0.2); /* لمسة ذهبية خفيفة */
+    transition: all 0.4s ease;
+}
+
+.memory-card:hover {
+    border-color: #d4af37; /* لون ذهبي عند المرور */
+    transform: translateY(-10px);
+}
+
+/* 3. تنسيق العناوين داخل المكون */
+.memory-showcase h2 {
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* 4. تنسيق إضافي لضمان التجاوب على الجوال */
+@media (max-width: 768px) {
+    .memory-showcase .grid {
+        gap: 1rem;
+    }
+}
