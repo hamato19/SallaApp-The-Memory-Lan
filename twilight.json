@@ -1,7 +1,7 @@
   "version": "1.0.0",
   "theme_name": "The Memory Lane",
-  "repo_url": "رابط مستودع الثيم",
-  "support_url": "رابط صفحة الدعم",
+  "repo_url": "https://github.com/hamato19/The-Memory-Lan",
+  "support_url": "https://github.com/hamato19/The-Memory-Lan",
   "description": {
     "ar": "ثيم عطور يجمع بين الأناقة الكلاسيكية وإحساس الحنين، مصمم لتجربة تسوق فاخرة",
     "en": "A perfume theme blending classic elegance with nostalgia, designed for a luxury shopping experience"
@@ -64,7 +64,7 @@
           "type": "static",
           "format": "description",
           "id": "component-preview",
-          "value": "<div><img class='w-full' src='رابط صورة معاينة المكون'></div>"
+          "value": "<div><img class='w-full' src=''></div>"
         },
         {
           "id": "slides",
@@ -96,7 +96,7 @@
             {
               "type": "string",
               "id": "slides.description",
-              "label": "وصف الذكرى",
+              "label": "صف الذكرى",
               "format": "textarea",
               "multilanguage": true,
               "placeholder": "حكاية عطر تعيد لك أجمل اللحظات...",
