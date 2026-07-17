@@ -1,0 +1,26 @@
+{# components/memory-showcase.twig #}
+<section class="memory-showcase py-12" style="background-color: {{ settings.bg_color | default('#ffffff') }};">
+  <div class="container mx-auto px-4">
+    
+    {# عنوان القسم #}
+    <h2 class="text-3xl text-center mb-10 font-bold" style="color: {{ settings.text_color | default('#333333') }};">
+      {{ settings.section_title }}
+    </h2>
+    
+    {# شبكة عرض الذكريات #}
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {% for item in settings.memory_items %}
+        <div class="memory-card group overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-300">
+          <div class="relative overflow-hidden">
+            <img src="{{ item.image | asset_url }}" alt="{{ item.title }}" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2" style="color: {{ settings.text_color }};">{{ item.title }}</h3>
+            <p class="text-gray-600 leading-relaxed">{{ item.description }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    
+  </div>
+</section>
