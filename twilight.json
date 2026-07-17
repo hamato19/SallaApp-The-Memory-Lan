@@ -1,4 +1,42 @@
 {
-  "name": "The Memory Lane",
-  "version": "1.0.0"
-}
+    "name": "The Memory Lane",
+      "version": "1.0.0",
+        "vendor": "your-name",
+          "description": "ثيم عطور يجمع بين الأناقة والحنين",
+            "features": [
+                "products-carousel",
+                    "quick-view",
+                        "ajax-add-to-cart"
+                          ],
+                            "settings": [
+                                {
+                                      "id": "primary_color",
+                                            "type": "color",
+                                                  "label": "اللون الأساسي",
+                                                        "default": "#8B7355"
+                                                            },
+                                                                {
+                                                                      "id": "font_style",
+                                                                            "type": "select",
+                                                                                  "label": "نوع الخط",
+                                                                                        "options": [
+                                                                                                {
+                                                                                                          "value": "classic",
+                                                                                                                    "label": "كلاسيكي"
+                                                                                                                            },
+                                                                                                                                    {
+                                                                                                                                              "value": "modern",
+                                                                                                                                                        "label": "حديث"
+                                                                                                                                                                }
+                                                                                                                                                                      ],
+                                                                                                                                                                            "default": "classic"
+                                                                                                                                                                                }
+                                                                                                                                                                                  ],
+                                                                                                                                                                                    "components": [
+                                                                                                                                                                                        {
+                                                                                                                                                                                              "name": "Memory Showcase",
+                                                                                                                                                                                                    "icon": "clock",
+                                                                                                                                                                                                          "path": "components/memory-showcase.twig"
+                                                                                                                                                                                                              }
+                                                                                                                                                                                                                ]
+                                                                                                                                                                                                                }
