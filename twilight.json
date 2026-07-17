@@ -1,7 +1,9 @@
-{
-  "version": "1.0.0",
-  "theme_name": "Theme One",
-  "repo_url": "https://github.com/SallaApp/The-Memory-Land",
-  "support_url": "https://salla.dev"
-  ...
-}
+"components": [
+  {
+    "name": "memory-showcase",
+    "title": "عارض الذكريات",
+    "icon": "sicon-image-carousel",
+    "path": "home.memory-showcase",
+    "fields": []
+  }
+]
