@@ -1,9 +1,19 @@
-"components": [
-  {
-    "name": "memory-showcase",
-    "title": "عارض الذكريات",
-    "icon": "sicon-image-carousel",
-    "path": "home.memory-showcase",
-    "fields": []
-  }
-]
+{
+  "version": "1.0.0",
+  "theme_name": "The Memory Lane",
+  "repo_url": "https://github.com/hamato19/SallaApp-The-Memory-Lan",
+  "support_url": "https://github.com/hamato19/SallaApp-The-Memory-Lan",
+  "settings": [],
+  "features": [
+    "component-featured-products"
+  ],
+  "components": [
+    {
+      "name": "memory-showcase",
+      "title": "عارض الذكريات",
+      "icon": "sicon-image-carousel",
+      "path": "home.memory-showcase",
+      "fields": []
+    }
+  ]
+}
