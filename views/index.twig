@@ -1,0 +1,25 @@
+{# views/index.twig #}
+
+{# 1. استدعاء الترويسة الأساسية للمتجر #}
+{% include 'layouts/header.twig' %}
+
+<main class="main-content">
+    
+    {# 2. (اختياري) يمكنك إضافة بانر أو سلايدر رئيسي هنا #}
+    {% component 'main-slider' %}
+
+    {# 3. استدعاء مكون "عرض الذكريات" الذي أنشأناه #}
+    {% component 'memory-showcase' %}
+
+    {# 4. عرض المنتجات المميزة أو التصنيفات #}
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold mb-6 text-center">أحدث العطور</h2>
+            {% component 'featured-products' %}
+        </div>
+    </section>
+
+</main>
+
+{# 5. استدعاء الذيل الأساسي للمتجر #}
+{% include 'layouts/footer.twig' %}
