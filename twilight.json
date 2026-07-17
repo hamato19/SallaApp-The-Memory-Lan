@@ -1,0 +1,19 @@
+{
+  "id": "memory_showcase",
+  "label": "عارض الذكريات",
+  "settings": [
+    { "id": "section_title", "type": "text", "label": "عنوان القسم", "default": "رحلتك مع العطر" },
+    { "id": "bg_color", "type": "color", "label": "لون الخلفية", "default": "#0a192f" },
+    { "id": "text_color", "type": "color", "label": "لون النص", "default": "#d4af37" },
+    {
+      "id": "memory_items",
+      "type": "list",
+      "label": "الذكريات",
+      "settings": [
+        { "id": "image", "type": "image", "label": "صورة الذكرى" },
+        { "id": "title", "type": "text", "label": "عنوان الذكرى" },
+        { "id": "description", "type": "textarea", "label": "وصف الذكرى" }
+      ]
+    }
+  ]
+}
