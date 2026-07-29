@@ -1,26 +1,661 @@
-{# components/memory-showcase.twig #}
-<section class="memory-showcase py-12" style="background-color: {{ settings.bg_color | default('#ffffff') }};">
-  <div class="container mx-auto px-4">
-    
-    {# عنوان القسم #}
-    <h2 class="text-3xl text-center mb-10 font-bold" style="color: {{ settings.text_color | default('#333333') }};">
-      {{ settings.section_title }}
-    </h2>
-    
-    {# شبكة عرض الذكريات #}
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {% for item in settings.memory_items %}
-        <div class="memory-card group overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-300">
-          <div class="relative overflow-hidden">
-            <img src="{{ item.image | asset_url }}" alt="{{ item.title }}" class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-500">
-          </div>
-          <div class="p-6">
-            <h3 class="text-xl font-semibold mb-2" style="color: {{ settings.text_color }};">{{ item.title }}</h3>
-            <p class="text-gray-600 leading-relaxed">{{ item.description }}</p>
-          </div>
+{# components/memory-showcase.twig - عارض الذكريات التفاعلي #}
+{# ==================================================================== #}
+
+<section class="memory-showcase section-padding" 
+         style="background-color: {{ settings.bg_color|default('#f8f6f1') }};">
+    <div class="container">
+        
+        {# ============================================================= #}
+        {# 1. رأس القسم مع تأثيرات بصرية #}
+        {# ============================================================= #}
+        <div class="showcase-header text-center" style="margin-bottom: 3rem;">
+            
+            {# أيقونة زخرفية #}
+            <div class="showcase-icon" style="font-size: 2.5rem; color: {{ theme.gold_color|default('#d4af37') }}; margin-bottom: 0.5rem;">
+                <i class="fas fa-crown"></i>
+            </div>
+            
+            {# العنوان الرئيسي #}
+            <h2 class="section-title" style="color: {{ settings.text_color|default('#2d2d2d') }};">
+                {{ settings.section_title|default('ذاكرتنا المميزة') }}
+            </h2>
+            
+            {# العنوان الفرعي #}
+            {% if settings.section_subtitle %}
+                <p class="section-subtitle" style="color: {{ settings.subtitle_color|default('#666666') }}; max-width: 600px; margin: 0.5rem auto 0;">
+                    {{ settings.section_subtitle }}
+                </p>
+            {% endif %}
+            
+            {# خط زخرفي تحت العنوان #}
+            <div class="title-underline" style="width: 80px; height: 4px; background: {{ theme.gold_color|default('#d4af37') }}; margin: 1rem auto 0; border-radius: 2px;"></div>
+            
         </div>
-      {% endfor %}
+        
+        {# ============================================================= #}
+        {# 2. خيارات العرض (Grid / Carousel) #}
+        {# ============================================================= #}
+        {% if settings.display_mode == 'carousel' %}
+            {# وضع الـ Carousel #}
+            <div class="showcase-carousel relative" 
+                 data-autoplay="{{ settings.autoplay|default('true') }}" 
+                 data-interval="{{ settings.autoplay_interval|default(5000) }}">
+                
+                <div class="carousel-track" style="display: flex; gap: 2rem; overflow: hidden; scroll-behavior: smooth;">
+                    {% for item in settings.memory_items %}
+                        {{ _self.memory_card(item, loop.index, settings) }}
+                    {% endfor %}
+                </div>
+                
+                {# أزرار التنقل #}
+                <button class="carousel-nav prev" 
+                        style="position: absolute; top: 50%; right: -2rem; transform: translateY(-50%); 
+                               background: {{ theme.gold_color|default('#d4af37') }}; color: white; border: none; 
+                               width: 48px; height: 48px; border-radius: 50%; cursor: pointer; font-size: 1.25rem;
+                               box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: all 0.3s ease; z-index: 10;
+                               display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                <button class="carousel-nav next" 
+                        style="position: absolute; top: 50%; left: -2rem; transform: translateY(-50%); 
+                               background: {{ theme.gold_color|default('#d4af37') }}; color: white; border: none; 
+                               width: 48px; height: 48px; border-radius: 50%; cursor: pointer; font-size: 1.25rem;
+                               box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: all 0.3s ease; z-index: 10;
+                               display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                
+                {# مؤشرات التقدم #}
+                <div class="carousel-dots" style="display: flex; justify-content: center; gap: 0.5rem; margin-top: 2rem;">
+                    {% for item in settings.memory_items %}
+                        <button class="dot" data-index="{{ loop.index0 }}" 
+                                style="width: 10px; height: 10px; border-radius: 50%; border: none; 
+                                       background: {{ loop.first ? theme.gold_color|default('#d4af37') : '#d4af3755' }}; 
+                                       cursor: pointer; transition: all 0.3s ease; padding: 0;">
+                        </button>
+                    {% endfor %}
+                </div>
+            </div>
+            
+        {% else %}
+            {# الوضع الافتراضي: شبكة (Grid) #}
+            <div class="showcase-grid" 
+                 style="display: grid; grid-template-columns: repeat({{ settings.columns|default(3) }}, 1fr); gap: {{ settings.gap|default(2) }}rem;">
+                {% for item in settings.memory_items %}
+                    {{ _self.memory_card(item, loop.index, settings) }}
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+        {# ============================================================= #}
+        {# 3. زر عرض الكل #}
+        {# ============================================================= #}
+        {% if settings.show_view_all|default(true) %}
+            <div class="text-center" style="margin-top: 3rem;">
+                <a href="{{ settings.view_all_link|default(url('category')) }}" 
+                   class="btn-view-all" 
+                   style="display: inline-flex; align-items: center; gap: 0.5rem; 
+                          padding: 0.75rem 2.5rem; 
+                          border: 2px solid {{ theme.gold_color|default('#d4af37') }}; 
+                          border-radius: 50px; 
+                          color: {{ theme.gold_color|default('#d4af37') }};
+                          background: transparent;
+                          font-weight: 600; 
+                          transition: all 0.3s ease; 
+                          text-decoration: none;">
+                    <span>{{ settings.view_all_text|default('استكشف كل الذكريات') }}</span>
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+            </div>
+        {% endif %}
+        
     </div>
-    
-  </div>
 </section>
+
+{# ============================================================= #}
+{# 3. ماكرو بطاقة الذكريات (Memory Card Macro) #}
+{# ============================================================= #}
+{% macro memory_card(item, index, settings) %}
+    <div class="memory-card group" 
+         style="background: {{ settings.card_bg|default('#ffffff') }}; 
+                border-radius: 16px; 
+                overflow: hidden; 
+                border: 1px solid {{ settings.card_border|default('rgba(212, 175, 55, 0.2)') }};
+                transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+                position: relative;">
+        
+        {# ========================================================= #}
+        {# 3.1 صورة البطاقة #}
+        {# ========================================================= #}
+        <div class="card-image-wrapper" 
+             style="position: relative; overflow: hidden; padding-top: 75%; background: #f5f5f5;">
+            
+            {% if item.image %}
+                <img src="{{ item.image|asset_url }}" 
+                     alt="{{ item.title }}" 
+                     class="card-image"
+                     style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+                            object-fit: cover; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);"
+                     loading="lazy">
+            {% else %}
+                <div class="card-image-placeholder" 
+                     style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; 
+                            background: {{ theme.gold_light|default('rgba(212, 175, 55, 0.1)') }}; color: {{ theme.gold_color|default('#d4af37') }};">
+                    <i class="fas fa-image" style="font-size: 3rem; opacity: 0.3;"></i>
+                </div>
+            {% endif %}
+            
+            {# شارة "جديد" أو "مميز" #}
+            {% if item.badge %}
+                <div class="card-badge" 
+                     style="position: absolute; top: 1rem; right: 1rem; 
+                            background: {{ item.badge_color|default(theme.gold_color|default('#d4af37')) }}; 
+                            color: white; 
+                            padding: 0.25rem 0.75rem; 
+                            border-radius: 50px; 
+                            font-size: 0.7rem; 
+                            font-weight: 700; 
+                            text-transform: uppercase; 
+                            letter-spacing: 1px;
+                            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+                            z-index: 2;">
+                    {{ item.badge }}
+                </div>
+            {% endif %}
+            
+            {# زر الإضافة السريعة (يظهر عند المرور) #}
+            <div class="card-actions" 
+                 style="position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%) translateY(20px); 
+                        opacity: 0; transition: all 0.3s ease; z-index: 5; width: calc(100% - 2rem);">
+                <button class="quick-add-btn" 
+                        data-product-id="{{ item.product_id|default(index) }}"
+                        style="width: 100%; padding: 0.6rem; 
+                               background: {{ theme.gold_color|default('#d4af37') }}; 
+                               color: white; border: none; border-radius: 50px; 
+                               font-weight: 600; font-size: 0.9rem; cursor: pointer;
+                               transition: all 0.3s ease;
+                               box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
+                    <i class="fas fa-shopping-bag" style="margin-left: 0.5rem;"></i>
+                    {{ 'أضف إلى السلة'|trans }}
+                </button>
+            </div>
+        </div>
+        
+        {# ========================================================= #}
+        {# 3.2 محتوى البطاقة #}
+        {# ========================================================= #}
+        <div class="card-content" style="padding: 1.5rem;">
+            
+            {# العنوان #}
+            <h3 class="card-title" 
+                style="font-size: 1.25rem; font-weight: 700; 
+                       color: {{ settings.text_color|default('#2d2d2d') }}; 
+                       margin-bottom: 0.25rem;">
+                {{ item.title }}
+            </h3>
+            
+            {# التصنيف أو العلامة التجارية #}
+            {% if item.category %}
+                <div class="card-category" 
+                     style="font-size: 0.8rem; color: {{ theme.gold_color|default('#d4af37') }}; 
+                            font-weight: 600; margin-bottom: 0.5rem;">
+                    {{ item.category }}
+                </div>
+            {% endif %}
+            
+            {# الوصف #}
+            {% if item.description %}
+                <p class="card-description" 
+                   style="color: {{ settings.description_color|default('#666666') }}; 
+                          font-size: 0.95rem; 
+                          line-height: 1.6; 
+                          margin-bottom: 1rem;
+                          display: -webkit-box;
+                          -webkit-line-clamp: 2;
+                          -webkit-box-orient: vertical;
+                          overflow: hidden;">
+                    {{ item.description }}
+                </p>
+            {% endif %}
+            
+            {# ========================================================= #}
+            {# 3.3 صف السعر والتقييم #}
+            {# ========================================================= #}
+            <div class="card-footer" 
+                 style="display: flex; align-items: center; justify-content: space-between; 
+                        padding-top: 0.75rem; border-top: 1px solid {{ settings.card_border|default('rgba(212, 175, 55, 0.1)') }};">
+                
+                {# السعر #}
+                <div class="card-price" style="display: flex; align-items: baseline; gap: 0.5rem;">
+                    {% if item.price %}
+                        <span class="current-price" 
+                              style="font-size: 1.25rem; font-weight: 700; 
+                                     color: {{ settings.price_color|default(theme.primary_color|default('#6C63FF')) }};">
+                            {{ item.price|format_currency }}
+                        </span>
+                    {% endif %}
+                    
+                    {% if item.old_price %}
+                        <span class="old-price" 
+                              style="font-size: 0.85rem; color: #999; text-decoration: line-through;">
+                            {{ item.old_price|format_currency }}
+                        </span>
+                    {% endif %}
+                </div>
+                
+                {# التقييم بالنجوم #}
+                {% if item.rating %}
+                    <div class="card-rating" style="display: flex; align-items: center; gap: 0.25rem;">
+                        <div class="stars" style="color: {{ theme.gold_color|default('#d4af37') }}; font-size: 0.85rem;">
+                            {% for i in 1..5 %}
+                                <i class="fas fa-star{{ i <= item.rating ? '' : '-o' }}"></i>
+                            {% endfor %}
+                        </div>
+                        {% if item.reviews_count %}
+                            <span style="font-size: 0.7rem; color: #999;">({{ item.reviews_count }})</span>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+            
+            {# ========================================================= #}
+            {# 3.4 زر "اعرف القصة" (لمسة السرد التفاعلي) #}
+            {# ========================================================= #}
+            {% if settings.show_story_btn|default(true) %}
+                <button class="story-btn" 
+                        data-story="{{ item.story|default('') }}"
+                        style="margin-top: 0.75rem; width: 100%; padding: 0.5rem; 
+                               background: transparent; border: 1px dashed {{ theme.gold_light|default('rgba(212, 175, 55, 0.3)') }}; 
+                               border-radius: 8px; color: {{ settings.text_color|default('#2d2d2d') }}; 
+                               font-size: 0.85rem; cursor: pointer; transition: all 0.3s ease;
+                               display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                    <i class="fas fa-book-open" style="color: {{ theme.gold_color|default('#d4af37') }};"></i>
+                    <span>{{ 'اقرأ قصة هذه الذكرى'|trans }}</span>
+                </button>
+            {% endif %}
+            
+        </div>
+        
+        {# ========================================================= #}
+        {# 3.5 تأثيرات الـ Hover #}
+        {# ========================================================= #}
+        <style>
+            .memory-card:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 12px 40px rgba(0,0,0,0.12) !important;
+                border-color: {{ theme.gold_color|default('#d4af37') }} !important;
+            }
+            
+            .memory-card:hover .card-image {
+                transform: scale(1.05);
+            }
+            
+            .memory-card:hover .card-actions {
+                opacity: 1 !important;
+                transform: translateX(-50%) translateY(0) !important;
+            }
+            
+            .quick-add-btn:hover {
+                background: {{ theme.primary_color|default('#6C63FF') }} !important;
+                transform: scale(1.02);
+            }
+            
+            .story-btn:hover {
+                background: {{ theme.gold_light|default('rgba(212, 175, 55, 0.1)') }};
+                border-color: {{ theme.gold_color|default('#d4af37') }} !important;
+            }
+            
+            .btn-view-all:hover {
+                background: {{ theme.gold_color|default('#d4af37') }};
+                color: white !important;
+                transform: translateY(-3px);
+                box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+            }
+            
+            .carousel-nav:hover {
+                background: {{ theme.primary_color|default('#6C63FF') }} !important;
+                transform: translateY(-50%) scale(1.1) !important;
+            }
+            
+            .dot:hover,
+            .dot.active {
+                background: {{ theme.gold_color|default('#d4af37') }} !important;
+                transform: scale(1.2);
+            }
+        </style>
+        
+    </div>
+{% endmacro %}
+
+{# ============================================================= #}
+{# 4. JavaScript للتفاعلات #}
+{# ============================================================= #}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    'use strict';
+    
+    // ============================================================= #
+    // 4.1 الإضافة السريعة إلى السلة
+    // ============================================================= #
+    document.querySelectorAll('.quick-add-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const productId = this.dataset.productId;
+            
+            // إظهار تعليق بسيط
+            const originalText = this.innerHTML;
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> {{ 'جاري الإضافة...'|trans }}';
+            this.disabled = true;
+            
+            // هنا يمكنك استدعاء API إضافة المنتج
+            fetch('{{ url('api/cart/add') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: JSON.stringify({
+                    product_id: productId,
+                    quantity: 1
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    this.innerHTML = '<i class="fas fa-check"></i> {{ 'تمت الإضافة ✓'|trans }}';
+                    this.style.background = '#4caf50';
+                    
+                    // تحديث عدد العربة
+                    updateCartCount();
+                    
+                    // عرض إشعار
+                    showNotification('{{ 'تمت إضافة المنتج إلى سلة مشترياتك'|trans }}', 'success');
+                } else {
+                    throw new Error(data.message || '{{ 'حدث خطأ'|trans }}');
+                }
+            })
+            .catch(error => {
+                this.innerHTML = '<i class="fas fa-times"></i> {{ 'فشل الإضافة'|trans }}';
+                this.style.background = '#ff6b6b';
+                showNotification(error.message, 'error');
+            })
+            .finally(() => {
+                setTimeout(() => {
+                    this.innerHTML = originalText;
+                    this.disabled = false;
+                    this.style.background = '{{ theme.gold_color|default('#d4af37') }}';
+                }, 2000);
+            });
+        });
+    });
+    
+    // ============================================================= #
+    // 4.2 زر "اقرأ القصة"
+    // ============================================================= #
+    document.querySelectorAll('.story-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const story = this.dataset.story;
+            if (!story) {
+                showNotification('{{ 'لا توجد قصة لهذا المنتج بعد'|trans }}', 'info');
+                return;
+            }
+            
+            // عرض القصة في نافذة منبثقة
+            showStoryModal(story);
+        });
+    });
+    
+    // ============================================================= #
+    // 4.3 الـ Carousel
+    // ============================================================= #
+    const carousel = document.querySelector('.showcase-carousel');
+    if (carousel) {
+        const track = carousel.querySelector('.carousel-track');
+        const dots = carousel.querySelectorAll('.dot');
+        const prevBtn = carousel.querySelector('.carousel-nav.prev');
+        const nextBtn = carousel.querySelector('.carousel-nav.next');
+        let currentIndex = 0;
+        let autoplayInterval = null;
+        const isAutoplay = carousel.dataset.autoplay === 'true';
+        const interval = parseInt(carousel.dataset.interval) || 5000;
+        
+        if (track && track.children.length > 0) {
+            const totalItems = track.children.length;
+            const itemWidth = track.children[0].offsetWidth + 32; // width + gap
+            
+            function goToSlide(index) {
+                if (index < 0) index = totalItems - 1;
+                if (index >= totalItems) index = 0;
+                currentIndex = index;
+                track.scrollTo({
+                    left: index * itemWidth,
+                    behavior: 'smooth'
+                });
+                
+                // تحديث النقاط
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                    dot.style.background = i === index ? '{{ theme.gold_color|default('#d4af37') }}' : '{{ theme.gold_light|default('rgba(212, 175, 55, 0.3)') }}';
+                });
+            }
+            
+            // أزرار التنقل
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
+            }
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+            }
+            
+            // النقاط
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => goToSlide(index));
+            });
+            
+            // التشغيل التلقائي
+            if (isAutoplay) {
+                function startAutoplay() {
+                    if (autoplayInterval) clearInterval(autoplayInterval);
+                    autoplayInterval = setInterval(() => goToSlide(currentIndex + 1), interval);
+                }
+                
+                function stopAutoplay() {
+                    if (autoplayInterval) {
+                        clearInterval(autoplayInterval);
+                        autoplayInterval = null;
+                    }
+                }
+                
+                startAutoplay();
+                
+                // إيقاف التشغيل عند التفاعل
+                carousel.addEventListener('mouseenter', stopAutoplay);
+                carousel.addEventListener('mouseleave', startAutoplay);
+            }
+        }
+    }
+});
+
+// ============================================================= #
+// 4.4 دوال مساعدة
+// ============================================================= #
+function updateCartCount() {
+    // تحديث عدد العربة
+    fetch('{{ url('api/cart/count') }}')
+        .then(response => response.json())
+        .then(data => {
+            document.querySelectorAll('.cart-badge').forEach(badge => {
+                badge.textContent = data.count || 0;
+            });
+        })
+        .catch(() => {});
+}
+
+function showNotification(message, type = 'success') {
+    // إنشاء إشعار
+    const notification = document.createElement('div');
+    notification.className = 'notification';
+    notification.style.cssText = `
+        position: fixed; top: 2rem; right: 2rem; 
+        padding: 1rem 1.5rem; 
+        background: ${type === 'success' ? '#4caf50' : type === 'error' ? '#ff6b6b' : '#2196f3'}; 
+        color: white; 
+        border-radius: 12px; 
+        box-shadow: 0 8px 30px rgba(0,0,0,0.2); 
+        z-index: 999999; 
+        font-weight: 600;
+        transform: translateX(120%);
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        max-width: 400px;
+        direction: rtl;
+    `;
+    notification.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
+            <span>${message}</span>
+        </div>
+    `;
+    document.body.appendChild(notification);
+    
+    // عرض الإشعار
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // إخفاء الإشعار
+    setTimeout(() => {
+        notification.style.transform = 'translateX(120%)';
+        setTimeout(() => notification.remove(), 400);
+    }, 4000);
+}
+
+function showStoryModal(story) {
+    // إنشاء نافذة عرض القصة
+    const modal = document.createElement('div');
+    modal.className = 'story-modal';
+    modal.style.cssText = `
+        position: fixed; inset: 0; 
+        background: rgba(0,0,0,0.8); 
+        z-index: 99999; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        padding: 2rem;
+        animation: fadeIn 0.3s ease;
+    `;
+    modal.innerHTML = `
+        <div style="background: white; border-radius: 20px; max-width: 500px; width: 100%; padding: 2rem; 
+                    position: relative; animation: slideUp 0.4s ease; direction: rtl;">
+            <button class="modal-close" style="position: absolute; top: 1rem; right: 1rem; 
+                    background: none; border: none; font-size: 1.5rem; cursor: pointer; 
+                    color: #666; transition: all 0.3s ease;">
+                <i class="fas fa-times"></i>
+            </button>
+            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                <div style="font-size: 2rem; color: {{ theme.gold_color|default('#d4af37') }};">
+                    <i class="fas fa-book-open"></i>
+                </div>
+                <h3 style="font-size: 1.5rem; font-weight: 700; margin: 0;">{{ 'قصة الذكرى'|trans }}</h3>
+            </div>
+            <div style="background: #f8f6f1; border-radius: 12px; padding: 1.5rem; 
+                        border-right: 4px solid {{ theme.gold_color|default('#d4af37') }};">
+                <p style="font-size: 1.05rem; line-height: 1.8; color: #333; margin: 0;">
+                    ${story}
+                </p>
+            </div>
+            <button class="modal-close-btn" style="width: 100%; margin-top: 1.5rem; padding: 0.75rem; 
+                    background: {{ theme.gold_color|default('#d4af37') }}; color: white; border: none; 
+                    border-radius: 12px; font-weight: 700; cursor: pointer; transition: all 0.3s ease;">
+                {{ 'اغلاق'|trans }}
+            </button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    
+    // إضافة حركات CSS
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+    `;
+    modal.appendChild(style);
+    
+    // إغلاق النافذة
+    const closeModal = () => modal.remove();
+    modal.querySelector('.modal-close').addEventListener('click', closeModal);
+    modal.querySelector('.modal-close-btn').addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+}
+</script>
+
+{# ============================================================= #}
+{# 5. دعم العرض التجاوبي #}
+{# ============================================================= #}
+<style>
+    @media (max-width: 1024px) {
+        .showcase-grid {
+            grid-template-columns: repeat({{ settings.columns|default(3) > 2 ? 2 : settings.columns|default(3) }}, 1fr) !important;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .showcase-grid {
+            grid-template-columns: repeat({{ settings.columns|default(3) > 1 ? 2 : 1 }}, 1fr) !important;
+            gap: 1rem !important;
+        }
+        
+        .memory-card .card-content {
+            padding: 1rem !important;
+        }
+        
+        .memory-card .card-title {
+            font-size: 1rem !important;
+        }
+        
+        .carousel-nav {
+            display: none !important;
+        }
+        
+        .card-actions {
+            opacity: 1 !important;
+            transform: translateX(-50%) translateY(0) !important;
+            bottom: 0.5rem !important;
+        }
+        
+        .quick-add-btn {
+            font-size: 0.8rem !important;
+            padding: 0.4rem !important;
+        }
+        
+        .story-btn {
+            font-size: 0.75rem !important;
+            padding: 0.4rem !important;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .showcase-grid {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 0.75rem !important;
+        }
+        
+        .memory-card .card-footer {
+            flex-direction: column;
+            align-items: flex-start !important;
+            gap: 0.5rem;
+        }
+        
+        .card-description {
+            display: none !important;
+        }
+    }
+</style>
