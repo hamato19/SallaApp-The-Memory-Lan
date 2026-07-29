@@ -1,250 +1,1138 @@
 {
-  "version": "1.0.0",
-  "theme_name": "The Memory Lane",
-  "theme_description": "ثيم السرد التفاعلي - يقدم تجربة تسوق فريدة تعتمد على القصص والتخصيص الفوري مع واجهة عصرية جذابة",
-  "repo_url": "https://github.com/hamato19/SallaApp-The-Memory-Lan",
-  "support_url": "https://github.com/hamato19/SallaApp-The-Memory-Lan",
-  "author": "hamato19",
-  "author_email": "hamato19@example.com",
-  "settings": [
-    {
-      "id": "store_logo",
-      "type": "image",
-      "label": "شعار المتجر",
-      "help": "يُفضل استخدام صورة PNG بخلفية شفافة"
+    "name": {
+        "ar": "The Memory Lane",
+        "en": "The Memory Lane"
     },
-    {
-      "id": "favicon",
-      "type": "image",
-      "label": "أيقونة المتجر (Favicon)",
-      "help": "صورة مربعة بحجم 32x32 بكسل"
-    },
-    {
-      "id": "primary_color",
-      "type": "color",
-      "label": "اللون الأساسي",
-      "default": "#6C63FF"
-    },
-    {
-      "id": "secondary_color",
-      "type": "color",
-      "label": "اللون الثانوي",
-      "default": "#FF6B6B"
-    },
-    {
-      "id": "gold_color",
-      "type": "color",
-      "label": "اللون الذهبي",
-      "default": "#d4af37"
-    },
-    {
-      "id": "bg_color",
-      "type": "color",
-      "label": "لون الخلفية الأساسي",
-      "default": "#ffffff"
-    },
-    {
-      "id": "text_color",
-      "type": "color",
-      "label": "لون النصوص الأساسي",
-      "default": "#2d2d2d"
-    },
-    {
-      "id": "hero_stories_enabled",
-      "type": "toggle",
-      "label": "تفعيل نظام القصص التفاعلية",
-      "default": true
-    },
-    {
-      "id": "stories_autoplay",
-      "type": "select",
-      "label": "تشغيل القصص تلقائياً",
-      "default": "manual",
-      "options": [
-        { "value": "manual", "label": "يدوي" },
-        { "value": "auto_3s", "label": "تلقائي كل 3 ثواني" },
-        { "value": "auto_5s", "label": "تلقائي كل 5 ثواني" }
-      ]
-    },
-    {
-      "id": "configurator_enabled",
-      "type": "toggle",
-      "label": "تفعيل مصمم الباقات التفاعلي",
-      "default": true
-    },
-    {
-      "id": "emotional_filter_enabled",
-      "type": "toggle",
-      "label": "تفعيل الفلترة العاطفية",
-      "default": true
-    },
-    {
-      "id": "smart_cart_enabled",
-      "type": "toggle",
-      "label": "تفعيل العربة الذكية",
-      "default": true
-    },
-    {
-      "id": "checkout_modal_enabled",
-      "type": "toggle",
-      "label": "تفعيل الدفع السريع",
-      "default": true
-    },
-    {
-      "id": "animation_speed",
-      "type": "select",
-      "label": "سرعة الحركات التفاعلية",
-      "default": "medium",
-      "options": [
-        { "value": "slow", "label": "بطيء" },
-        { "value": "medium", "label": "متوسط" },
-        { "value": "fast", "label": "سريع" }
-      ]
-    },
-    {
-      "id": "memory_theme",
-      "type": "select",
-      "label": "طابع الذكريات",
-      "default": "vintage",
-      "options": [
-        { "value": "vintage", "label": "كلاسيكي قديم" },
-        { "value": "modern", "label": "عصري حديث" },
-        { "value": "minimal", "label": "بسيط وأنيق" },
-        { "value": "vibrant", "label": "نابض بالحياة" }
-      ]
-    }
-  ],
-  "features": [
-    "component-featured-products",
-    "memory-stories",
-    "product-configurator",
-    "emotional-filter",
-    "smart-cart",
-    "quick-checkout"
-  ],
-  "components": [
-    {
-      "name": "memory-showcase",
-      "title": "عارض الذكريات",
-      "icon": "sicon-image-carousel",
-      "path": "home.memory-showcase",
-      "fields": [
+    "repository": "https://github.com/hamato19/themename",
+    "author_email": "Hamato19@gmail.com",
+    "features": [
+        "mega-menu",
+        "fonts",
+        "color",
+        "breadcrumb",
+        "unite-cards-height",
+        "component-featured-products",
+        "component-fixed-banner",
+        "component-fixed-products",
+        "component-products-slider",
+        "component-photos-slider",
+        "component-parallax-background",
+        "component-testimonials",
+        "component-square-photos",
+        "component-store-features",
+        "component-youtube",
+        "menu-images",
+        "filters"
+    ],
+    "settings": [
         {
-          "id": "showcase_title",
-          "type": "text",
-          "label": "عنوان العارض",
-          "default": "رحلتك تبدأ من هنا"
+            "id": "memory_photo_bg_image_size",
+            "type": "items",
+            "format": "dropdown-list",
+            "label": "طريقة عرض الصور في قسم الذكريات",
+            "description": "اختر كيفية ظهور صور الذكريات في المتجر",
+            "labelHTML": null,
+            "icon": "sicon-image",
+            "selected": [
+                {
+                    "label": "اظهار الصورة كاملةً في المنتصف (Contain)",
+                    "value": "contain",
+                    "key": "f4adec13-6e4c-654b-b978-b2807935ced9"
+                }
+            ],
+            "options": [
+                {
+                    "label": "تغطية الصورة كامل المساحة (Cover)",
+                    "value": "cover",
+                    "key": "e9c8ea8f-c5c6-234e-935-3bce269afde4"
+                },
+                {
+                    "label": "اظهار الصورة كاملةً في المنتصف (Contain)",
+                    "value": "contain",
+                    "key": "f4adec13-6e4c-654b-b978-b2807935ced9"
+                }
+            ],
+            "source": "Manual",
+            "required": true
         },
         {
-          "id": "showcase_subtitle",
-          "type": "text",
-          "label": "النص الفرعي",
-          "default": "اختر ذاكرتك القادمة"
-        }
-      ]
-    },
-    {
-      "name": "stories-carousel",
-      "title": "دوائر القصص التفاعلية",
-      "icon": "sicon-instagram",
-      "path": "home.stories-carousel",
-      "fields": [
+            "type": "boolean",
+            "icon": "sicon-toggle-off",
+            "label": "وضع عمودي للمنتجات في قسم المنتجات المميزة",
+            "description": "يعرض المنتجات بشكل عمودي بدلاً من الأفقي",
+            "id": "vertical_featured_products",
+            "format": "switch",
+            "required": false,
+            "value": false,
+            "selected": false
+        },
         {
-          "id": "stories_title",
-          "type": "text",
-          "label": "عنوان القصص",
-          "default": "اكتشف قصص منتجاتنا"
-        }
-      ]
-    },
-    {
-      "name": "bundle-configurator",
-      "title": "مصمم الباقات التفاعلي",
-      "icon": "sicon-cube",
-      "path": "product.bundle-configurator",
-      "fields": [
+            "type": "boolean",
+            "id": "is_more_button_enabled",
+            "label": "عرض زر (عرض الكل) في الصفحة الرئيسية",
+            "format": "switch",
+            "value": true,
+            "selected": true
+        },
         {
-          "id": "configurator_title",
-          "type": "text",
-          "label": "عنوان المصمم",
-          "default": "صمم باقاتك بنفسك"
-        }
-      ]
-    },
-    {
-      "name": "emotional-filter",
-      "title": "الفلترة العاطفية الذكية",
-      "icon": "sicon-heart",
-      "path": "category.emotional-filter",
-      "fields": [
+            "type": "static",
+            "id": "static-line1",
+            "format": "line"
+        },
         {
-          "id": "filter_title",
-          "type": "text",
-          "label": "عنوان الفلترة",
-          "default": "لمن تبحث عن هدية اليوم؟"
-        }
-      ]
-    },
-    {
-      "name": "smart-cart-drawer",
-      "title": "عربة التسوق الذكية",
-      "icon": "sicon-shopping-bag",
-      "path": "cart.smart-cart-drawer",
-      "fields": [
+            "type": "static",
+            "format": "title",
+            "id": "static-label2",
+            "value": "<div class='rounded-lg' style='background: linear-gradient(135deg, #8B7355, #C4A882); display: flex; justify-content: center; align-items: center;padding: 20px;margin-bottom: 20px !important; flex-direction: column;gap: 15px;border-radius: 12px;box-shadow: 0 4px 15px rgba(139, 115, 85, 0.3);'><h6 style='color: #ffffff;font-size: 16px; font-weight: bold;letter-spacing: 1px;'> ✨ خيارات أعلى الصفحة - ذكريات الماضي ✨</h6></div>",
+            "variant": "h6"
+        },
         {
-          "id": "cart_title",
-          "type": "text",
-          "label": "عنوان العربة",
-          "default": "سلة مشترياتك"
-        }
-      ]
-    },
-    {
-      "name": "quick-checkout-modal",
-      "title": "الدفع السريع بنافذة واحدة",
-      "icon": "sicon-credit-card",
-      "path": "checkout.quick-checkout-modal",
-      "fields": [
+            "id": "header_is_sticky",
+            "label": "تثبيت القائمة الرئيسية أعلى الصفحة عند التمرير",
+            "description": "يُنصح بإلغاء التفعيل في حالة وجود عناصر كثيرة في القائمة",
+            "type": "boolean",
+            "icon": "sicon-toggle-off",
+            "format": "switch",
+            "required": false,
+            "value": true,
+            "selected": true
+        },
         {
-          "id": "modal_title",
-          "type": "text",
-          "label": "عنوان النافذة",
-          "default": "إتمام الطلب بسرعة"
-        }
-      ]
-    },
-    {
-      "name": "memory-timeline",
-      "title": "خط زمني للذكريات",
-      "icon": "sicon-calendar",
-      "path": "home.memory-timeline",
-      "fields": [
+            "type": "boolean",
+            "icon": "sicon-toggle-off",
+            "label": "شريط علوي بلون داكن (أنيق)",
+            "description": "يمنح المتجر مظهراً كلاسيكياً فاخراً",
+            "id": "topnav_is_dark",
+            "format": "switch",
+            "required": false,
+            "value": true,
+            "selected": true
+        },
         {
-          "id": "timeline_title",
-          "type": "text",
-          "label": "عنوان الخط الزمني",
-          "default": "رحلتك معنا"
+            "type": "boolean",
+            "icon": "sicon-toggle-off",
+            "label": "عرض روابط الصفحات الهامة في الشريط العلوي",
+            "description": "مثل صفحة الهبوط، المدونة، الصفحات التعريفية",
+            "id": "important_links",
+            "format": "switch",
+            "required": false,
+            "value": true,
+            "selected": true
+        },
+        {
+            "type": "boolean",
+            "icon": "sicon-toggle-off",
+            "label": "تفعيل قائمة المزيد في القائمة الرئيسية",
+            "description": "تظهر الروابط الإضافية في قائمة منسدلة عند عدم وجود مساحة",
+            "id": "enable_more_menu",
+            "format": "switch",
+            "required": false,
+            "value": true,
+            "selected": true
+        },
+        {
+            "type": "static",
+            "id": "static-line3",
+            "format": "line"
+        },
+        {
+            "type": "static",
+            "format": "title",
+            "id": "static-label4",
+            "value": "<div class='rounded-lg' style='background: linear-gradient(135deg, #5D4037, #8D6E63); display: flex; justify-content: center; align-items: center;padding: 20px;margin-bottom: 20px !important; flex-direction: column;gap: 15px;border-radius: 12px;box-shadow: 0 4px 15px rgba(93, 64, 55, 0.3);'><h6 style='color: #F5E6D3;font-size: 16px; font-weight: bold;letter-spacing: 1px;'> 🌙 خيارات أسفل الصفحة - لمسات الحنين 🌙</h6></div>",
+            "variant": "h6"
+        },
+        {
+            "type": "boolean",
+            "icon": "sicon-toggle-off",
+            "label": "تذييل داكن (أنيق)",
+            "description": "يمنح التذييل مظهراً كلاسيكياً فاخراً",
+            "id": "footer_is_dark",
+            "format": "switch",
+            "required": false,
+            "value": true,
+            "selected": true
+        },
+        {
+            "type": "static",
+            "id": "static-line5",
+            "format": "line"
+        },
+        {
+            "type": "static",
+            "format": "title",
+            "id": "static-label6",
+            "value": "<div class='rounded-lg' style='background: linear-gradient(135deg, #A67B5B, #D4A574); display: flex; justify-content: center; align-items: center;padding: 20px;margin-bottom: 20px !important; flex-direction: column;gap: 15px;border-radius: 12px;box-shadow: 0 4px 15px rgba(166, 123, 91, 0.3);'><h6 style='color: #2C1810;font-size: 16px; font-weight: bold;letter-spacing: 1px;'> 🏺 خيارات صفحة المنتج - تفاصيل العطر 🏺</h6></div>",
+            "variant": "h6"
+        },
+        {
+            "type": "boolean",
+            "icon": "sicon-toggle-off",
+            "label": "إظهار مسار التنقل في صفحة المنتج",
+            "description": "يساعد الزوار في معرفة موقعهم داخل المتجر",
+            "id": "product_show_breadcrumbs",
+            "format": "switch",
+            "required": false,
+            "value": true,
+            "selected": true
+        },
+        {
+            "type": "boolean",
+            "icon": "sicon-toggle-off",
+            "label": "إظهار مسار التنقل في صفحة قائمة المنتجات",
+            "description": "يساعد الزوار في معرفة موقعهم داخل المتجر",
+            "id": "product_index_show_breadcrumbs",
+            "format": "switch",
+            "required": false,
+            "value": true,
+            "selected": true
+        },
+        {
+            "type": "boolean",
+            "icon": "sicon-toggle-off",
+            "label": "تفعيل إشعار الإضافة للسلة المحسن",
+            "description": "يظهر إشعار منبثق أنيق عند إضافة منتج للسلة",
+            "id": "enable_add_product_toast",
+            "format": "switch",
+            "required": false,
+            "value": true,
+            "selected": true
+        },
+        {
+            "type": "boolean",
+            "icon": "sicon-toggle-off",
+            "label": "إظهار زر 'أعلمني عند التوفر' في بطاقة المنتج",
+            "description": "يظهر في بطاقات المنتجات التي نفذت كميتها",
+            "id": "notify_when_available_in_card",
+            "format": "switch",
+            "required": false,
+            "value": true,
+            "selected": true
+        },
+        {
+            "type": "boolean",
+            "icon": "sicon-toggle-off",
+            "label": "تثبيت زر الإضافة والكمية أسفل شاشة الجوال",
+            "description": "يحسن تجربة المستخدم على الأجهزة المحمولة",
+            "id": "sticky_add_to_cart",
+            "format": "switch",
+            "required": false,
+            "value": true,
+            "selected": true
+        },
+        {
+            "type": "boolean",
+            "icon": "sicon-toggle-off",
+            "label": "إظهار الوسوم",
+            "description": "يعرض وسوم المنتج مثل 'جديد'، 'تخفيض'",
+            "id": "show_tags",
+            "format": "switch",
+            "required": false,
+            "value": true,
+            "selected": true
+        },
+        {
+            "id": "slider_background_size",
+            "type": "items",
+            "format": "dropdown-list",
+            "label": "طريقة عرض الصور في سلايدر المنتج",
+            "description": "اختر كيفية ظهور صور المنتج في السلايدر",
+            "labelHTML": null,
+            "icon": "sicon-image",
+            "selected": [
+                {
+                    "label": "اظهار الصورة كاملةً في المنتصف (Contain)",
+                    "value": "contain",
+                    "key": "f4adec13-6e4c-433b-b141-b2807935ced9"
+                }
+            ],
+            "options": [
+                {
+                    "label": "تغطية الصورة كامل المساحة (Cover)",
+                    "value": "cover",
+                    "key": "e9c8ea8f-c5c6-438e-9d45-3bce269afde4"
+                },
+                {
+                    "label": "اظهار الصورة كاملةً في المنتصف (Contain)",
+                    "value": "contain",
+                    "key": "f4adec13-6e4c-433b-b141-b2807935ced9"
+                }
+            ],
+            "source": "Manual",
+            "required": true
+        },
+        {
+            "type": "boolean",
+            "icon": "sicon-toggle-off",
+            "label": "تفعيل خاصية التكبير في سلايدر المنتج",
+            "description": "تتيح للزوار تكبير الصورة لرؤية التفاصيل الدقيقة للعطر",
+            "id": "imageZoom",
+            "format": "switch",
+            "required": false,
+            "value": true,
+            "selected": true
+        },
+        {
+            "type": "color",
+            "icon": "sicon-color-palette",
+            "label": "اللون الأساسي للثيم (لون الذكريات)",
+            "description": "اللون الرئيسي الذي يعبر عن طابع الحنين والأناقة",
+            "id": "primary_color",
+            "format": "color",
+            "value": "#8B7355",
+            "selected": "#8B7355"
+        },
+        {
+            "type": "color",
+            "icon": "sicon-color-palette",
+            "label": "اللون الثانوي (لون العطور الفاخرة)",
+            "description": "لون مكمل يعكس الفخامة والرقي",
+            "id": "secondary_color",
+            "format": "color",
+            "value": "#C4A882",
+            "selected": "#C4A882"
         }
-      ]
+    ],
+    "components": [
+        {
+            "key": "memory-slider-001",
+            "title": {
+                "en": "Memory Lane Slider",
+                "ar": "سلايدر ذكريات العطور"
+            },
+            "icon": "sicon-image-carousel",
+            "path": "home.memory-slider",
+            "fields": [
+                {
+                    "type": "static",
+                    "format": "description",
+                    "id": "static-desc",
+                    "value": "<div ><h4 >✨ سلايدر ذكريات العطور ✨</h4><p >أضف لمسة من الحنين إلى متجرك مع صور تعكس ذكريات العطور الفاخرة</p></div>"
+                },
+                {
+                    "type": "static",
+                    "format": "description",
+                    "id": "enhance-slider-note",
+                    "value": "<div ><strong>💡 نصيحة:</strong> استخدم صوراً تعكس ذكريات العطور، مثل زجاجات العطور الكلاسيكية، أو مشاهد تعبر عن الحنين والأناقة</div>"
+                },
+                {
+                    "id": "slides",
+                    "type": "collection",
+                    "format": "collection",
+                    "required": true,
+                    "minLength": 1,
+                    "maxLength": 10,
+                    "label": "شرائح الذكريات",
+                    "item_label": "شريحة ذكرى",
+                    "value": [
+                        {
+                            "slides.image": "https://cdn.salla.sa/ZrBEO/MopzhoqpTkDObcKc8Q8n77AuydanfsGXdZO7iinH.jpg",
+                            "slides.title": "ذكريات العطور الكلاسيكية",
+                            "slides.description": "استعد معنا رحلة عبر الزمن مع أروع العطور التي صنعت الذكريات",
+                            "slides.without_overlay": false
+                        },
+                        {
+                            "slides.image": "https://cdn.salla.sa/ZrBEO/3gOhYSaIhaHxhH2IHWxJYDl9JHwxP6dGKiZFSq4K.jpg",
+                            "slides.title": "كل عطر يحكي قصة",
+                            "slides.description": "اكتشف العطور التي تروي حكايات الحب والحنين والجمال",
+                            "slides.without_overlay": false
+                        }
+                    ],
+                    "fields": [
+                        {
+                            "type": "string",
+                            "icon": "sicon-image",
+                            "value": null,
+                            "id": "slides.image",
+                            "label": "صورة الذكرى",
+                            "format": "image",
+                            "required": true,
+                            "placeholder": "اختر صورة تعبر عن الذكرى",
+                            "description": "* المقاس المناسب للصورة هو 900×600 بكسل"
+                        },
+                        {
+                            "type": "string",
+                            "icon": "sicon-format-text-alt",
+                            "label": "عنوان الذكرى",
+                            "multilanguage": true,
+                            "id": "slides.title",
+                            "value": null,
+                            "required": false,
+                            "format": "text",
+                            "description": "عنوان يعبر عن جوهر الذكرى التي يحملها العطر",
+                            "placeholder": "مثلاً: ذكريات الخريف...",
+                            "hide": false,
+                            "minLength": 0,
+                            "maxLength": 100
+                        },
+                        {
+                            "type": "string",
+                            "icon": "sicon-typography",
+                            "label": "وصف الذكرى",
+                            "multilanguage": true,
+                            "id": "slides.description",
+                            "value": null,
+                            "description": "قصة قصيرة تعبر عن الذكرى التي يثيرها العطر",
+                            "format": "textarea",
+                            "required": false,
+                            "placeholder": "حكاية عطر تعيد لك أجمل اللحظات...",
+                            "minLength": 0,
+                            "maxLength": 255
+                        },
+                        {
+                            "type": "boolean",
+                            "icon": "sicon-toggle-off",
+                            "label": "إزالة طبقة التعتم",
+                            "description": "إظهار الصورة بدون تأثير التعتم",
+                            "id": "slides.without_overlay",
+                            "format": "switch",
+                            "required": false,
+                            "value": false,
+                            "selected": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "memory-quick-links-002",
+            "title": {
+                "en": "Memory Lane Quick Links",
+                "ar": "روابط سريعة - ذاكرة العطر"
+            },
+            "icon": "sicon-layout-grid-rearrange",
+            "path": "home.memory-links",
+            "fields": [
+                {
+                    "type": "static",
+                    "format": "description",
+                    "id": "with-bg",
+                    "value": "<div ><h4 >🌹 روابط ذاكرة العطر 🌹</h4></div>",
+                    "conditions": [
+                        {
+                            "id": "merge_with_top_component",
+                            "operation": "=",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "type": "static",
+                    "format": "description",
+                    "id": "without-bg",
+                    "value": "<div ><h6 >🌹 روابط ذاكرة العطر 🌹</h6></div>",
+                    "conditions": [
+                        {
+                            "id": "merge_with_top_component",
+                            "operation": "=",
+                            "value": false
+                        }
+                    ]
+                },
+                {
+                    "type": "string",
+                    "icon": "sicon-format-text-alt",
+                    "label": "عنوان القسم",
+                    "multilanguage": true,
+                    "id": "title",
+                    "value": {
+                        "ar": "اكتشف عطور الذكريات",
+                        "en": "Discover Memory Perfumes"
+                    },
+                    "required": false,
+                    "format": "text",
+                    "description": "عنوان يعبر عن رحلة اكتشاف العطور",
+                    "placeholder": "أدخل عنوان القسم هنا...",
+                    "minLength": 0,
+                    "maxLength": 100
+                },
+                {
+                    "type": "boolean",
+                    "icon": "sicon-toggle-off",
+                    "label": "دمج مع العنصر السابق",
+                    "description": "دمج هذا القسم مع السلايدر للحصول على مظهر متكامل",
+                    "id": "merge_with_top_component",
+                    "format": "switch",
+                    "required": false,
+                    "value": false,
+                    "selected": false
+                },
+                {
+                    "type": "static",
+                    "format": "description",
+                    "id": "static-desc",
+                    "value": "<small >* دمج هذا القسم مع السلايدر يخلق تجربة بصرية متكاملة تعكس ذكريات العطور</small>"
+                },
+                {
+                    "type": "boolean",
+                    "icon": "sicon-toggle-off",
+                    "label": "عرض أسهم التحرك",
+                    "description": "إظهار أزرار التنقل في القسم",
+                    "id": "show_controls",
+                    "format": "switch",
+                    "required": false,
+                    "value": true,
+                    "selected": true
+                },
+                {
+                    "type": "boolean",
+                    "icon": "sicon-toggle-off",
+                    "label": "عرض روابط التصنيفات",
+                    "description": "عرض تصنيفات العطور بدلاً من الروابط المخصصة",
+                    "id": "show_cats",
+                    "format": "switch",
+                    "required": false,
+                    "value": false,
+                    "selected": false
+                },
+                {
+                    "id": "categories",
+                    "type": "items",
+                    "format": "dropdown-list",
+                    "label": "حدد تصنيفات العطور",
+                    "labelHTML": null,
+                    "icon": "sicon-keyboard_arrow_down",
+                    "selected": [],
+                    "options": [],
+                    "source": "categories",
+                    "multichoice": true,
+                    "searchable": true,
+                    "required": false,
+                    "conditions": [
+                        {
+                            "id": "show_cats",
+                            "operation": "=",
+                            "value": true
+                        }
+                    ]
+                },
+                {
+                    "id": "links",
+                    "type": "collection",
+                    "format": "collection",
+                    "required": true,
+                    "minLength": 3,
+                    "maxLength": 100,
+                    "item_label": "رابط",
+                    "value": [
+                        {
+                            "links.icon": "sicon-perfume",
+                            "links.title": "عطور كلاسيكية",
+                            "links.url__type": "offers_link"
+                        },
+                        {
+                            "links.icon": "sicon-flower",
+                            "links.title": "عطور زهرية",
+                            "links.url__type": "offers_link"
+                        },
+                        {
+                            "links.icon": "sicon-moon",
+                            "links.title": "عطور خشبية",
+                            "links.url__type": "offers_link"
+                        },
+                        {
+                            "links.icon": "sicon-sparkle",
+                            "links.title": "عطور فاخرة",
+                            "links.url__type": "offers_link"
+                        },
+                        {
+                            "links.icon": "sicon-heart",
+                            "links.title": "هدايا العطور",
+                            "links.url__type": "offers_link"
+                        }
+                    ],
+                    "fields": [
+                        {
+                            "type": "string",
+                            "icon": "sicon-format-text-alt",
+                            "label": "أيقونة الرابط",
+                            "id": "links.icon",
+                            "value": "sicon-store2",
+                            "required": false,
+                            "format": "icon",
+                            "class": "form--inline",
+                            "description": "اختر أيقونة تعبر عن نوع العطر"
+                        },
+                        {
+                            "type": "string",
+                            "icon": "sicon-format-text-alt",
+                            "multilanguage": true,
+                            "id": "links.title",
+                            "value": null,
+                            "required": false,
+                            "format": "text",
+                            "description": "عنوان الرابط (اسم الفئة أو المجموعة)",
+                            "placeholder": "أدخل عنوان الرابط هنا...",
+                            "minLength": 2,
+                            "maxLength": 80
+                        },
+                        {
+                            "type": "items",
+                            "icon": "sicon-link",
+                            "label": "الرابط",
+                            "id": "links.url",
+                            "value": null,
+                            "description": "اختر الصفحة التي سينتقل إليها الزوار",
+                            "required": false,
+                            "format": "variable-list",
+                            "searchable": true,
+                            "source": "custom",
+                            "sources": [
+                                {
+                                    "label": "منتج",
+                                    "key": "products",
+                                    "value": "products"
+                                },
+                                {
+                                    "label": "منتجات مع وسم",
+                                    "key": "products_tags",
+                                    "value": "products_tags"
+                                },
+                                {
+                                    "label": "تصنيف",
+                                    "key": "categories",
+                                    "value": "categories"
+                                },
+                                {
+                                    "label": "ماركة تجارية",
+                                    "key": "brands",
+                                    "value": "brands"
+                                },
+                                {
+                                    "label": "صفحة تعريفية",
+                                    "key": "pages",
+                                    "value": "pages"
+                                },
+                                {
+                                    "label": "مقالة",
+                                    "key": "blog_articles",
+                                    "value": "blog_articles"
+                                },
+                                {
+                                    "label": "تصنيف ضمن المدونة",
+                                    "key": "blog_categories",
+                                    "value": "blog_categories"
+                                },
+                                {
+                                    "label": "التخفيضات",
+                                    "key": "offers_link",
+                                    "value": "offers_link"
+                                },
+                                {
+                                    "label": "الماركات التجارية",
+                                    "key": "brands_link",
+                                    "value": "brands_link"
+                                },
+                                {
+                                    "label": "المدونة",
+                                    "key": "blog_link",
+                                    "value": "blog_link"
+                                },
+                                {
+                                    "label": "رابط خارجي",
+                                    "key": "custom",
+                                    "value": "custom"
+                                }
+                            ]
+                        }
+                    ],
+                    "conditions": [
+                        {
+                            "id": "show_cats",
+                            "operation": "=",
+                            "value": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "memory-products-slider-003",
+            "title": {
+                "en": "Memory Perfumes Slider",
+                "ar": "سلايدر عطور الذكريات"
+            },
+            "icon": "sicon-list-play",
+            "path": "home.memory-products-slider",
+            "fields": [
+                {
+                    "type": "static",
+                    "format": "description",
+                    "id": "with-bg",
+                    "value": "<div ><h4 >🌟 عطور تحمل ذكرياتك 🌟</h4></div>"
+                },
+                {
+                    "type": "string",
+                    "icon": "sicon-image",
+                    "value": "https://cdn.salla.sa/form-builder/D7bG3pgSit43TheOejBOZV7LIfG1y1Cj0hWLmgIh.jpg",
+                    "label": "صورة خلفية القسم",
+                    "id": "background",
+                    "format": "image",
+                    "required": true,
+                    "placeholder": "اختر خلفية تعكس ذكريات العطور",
+                    "description": "* المقاس المناسب للصورة هو 1233×500 بكسل",
+                    "settings": {
+                        "height": 580,
+                        "width": 1400
+                    }
+                },
+                {
+                    "type": "string",
+                    "icon": "sicon-format-text-alt",
+                    "label": "عنوان القسم الرئيسي",
+                    "multilanguage": true,
+                    "id": "title",
+                    "value": {
+                        "ar": "عطور تروي حكايات الذكريات",
+                        "en": "Perfumes That Tell Memory Stories"
+                    },
+                    "required": false,
+                    "format": "text",
+                    "description": "عنوان يعبر عن جوهر العطور التي تحمل الذكريات",
+                    "placeholder": "مثلاً: عطور تروي حكايات الذكريات...",
+                    "hide": false,
+                    "minLength": 0,
+                    "maxLength": "80"
+                },
+                {
+                    "type": "string",
+                    "icon": "sicon-typography",
+                    "label": "نص توضيحي",
+                    "multilanguage": true,
+                    "id": "description",
+                    "value": {
+                        "ar": "اكتشف مجموعة من العطور التي تعيد لك أجمل الذكريات",
+                        "en": "Discover a collection of perfumes that bring back your fondest memories"
+                    },
+                    "description": "وصف قصير يعبر عن فكرة القسم",
+                    "format": "textarea",
+                    "required": false,
+                    "placeholder": "أضف وصفاً قصيراً عن عطور الذكريات...",
+                    "minLength": 0,
+                    "maxLength": "256"
+                },
+                {
+                    "type": "items",
+                    "icon": "sicon-keyboard_arrow_down",
+                    "label": "اختر منتجات العطور",
+                    "id": "products",
+                    "format": "dropdown-list",
+                    "description": "اختر العطور التي تريد عرضها في هذا القسم",
+                    "selected": [],
+                    "options": [],
+                    "required": true,
+                    "multichoice": true,
+                    "source": "products",
+                    "searchable": true,
+                    "maxLength": 8,
+                    "minLength": 1,
+                    "value": []
+                },
+                {
+                    "type": "items",
+                    "icon": "sicon-link",
+                    "label": "رابط عرض الكل",
+                    "id": "display_all_url",
+                    "value": [],
+                    "description": "عند اختيار رابط فارغ سيتم إخفاء زر 'عرض الكل'",
+                    "required": false,
+                    "format": "variable-list",
+                    "searchable": true,
+                    "source": "custom",
+                    "sources": [
+                        {
+                            "label": "منتج",
+                            "key": "products",
+                            "value": "products"
+                        },
+                        {
+                            "label": "منتجات مع وسم",
+                            "key": "products_tags",
+                            "value": "products_tags"
+                        },
+                        {
+                            "label": "تصنيف",
+                            "key": "categories",
+                            "value": "categories"
+                        },
+                        {
+                            "label": "ماركة تجارية",
+                            "key": "brands",
+                            "value": "brands"
+                        },
+                        {
+                            "label": "صفحة تعريفية",
+                            "key": "pages",
+                            "value": "pages"
+                        },
+                        {
+                            "label": "مقالة",
+                            "key": "blog_articles",
+                            "value": "blog_articles"
+                        },
+                        {
+                            "label": "تصنيف ضمن المدونة",
+                            "key": "blog_categories",
+                            "value": "blog_categories"
+                        },
+                        {
+                            "label": "التخفيضات",
+                            "key": "offers_link",
+                            "value": "offers_link"
+                        },
+                        {
+                            "label": "الماركات التجارية",
+                            "key": "brands_link",
+                            "value": "brands_link"
+                        },
+                        {
+                            "label": "المدونة",
+                            "key": "blog_link",
+                            "value": "blog_link"
+                        },
+                        {
+                            "label": "رابط خارجي",
+                            "key": "custom",
+                            "value": "custom"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "memory-square-banners-004",
+            "title": {
+                "en": "Memory Square Banners",
+                "ar": "بانات ذكريات مربعة"
+            },
+            "icon": "sicon-image",
+            "path": "home.memory-square-banners",
+            "image": "https://cdn.salla.network/images/themes/raed/preview-images/square-images.png?v=1.1",
+            "is_default": true,
+            "fields": [
+                {
+                    "type": "static",
+                    "format": "description",
+                    "id": "with-bg",
+                    "value": "<div style='background: linear-gradient(135deg, #A67B5B, #D4A574); border-radius: 12px; padding: 20px;'><h4 style='color: #2C1810; text-align: center;'>📸 ذكريات في صور 📸</h4></div>"
+                },
+                {
+                    "type": "static",
+                    "format": "description",
+                    "id": "banners-note",
+                    "value": "<div style='background-color: #FFF8F0; border-radius: 8px;padding: 12px 16px;margin-bottom: 16px;color: #5D4037;font-size: 14px;line-height: 1.6;border-right: 4px solid #8B7355;'><strong style='color: #8B7355;'>💡 تذكير:</strong> استخدم صوراً تعكس ذكريات العطور، مثل زجاجات العطور الكلاسيكية في أماكن جميلة، مع مراعاة اقتصاص الصور من الأطراف لتناسب المقاسات.</div>"
+                },
+                {
+                    "id": "banners",
+                    "type": "collection",
+                    "format": "collection",
+                    "required": true,
+                    "minLength": 1,
+                    "maxLength": 5,
+                    "label": "قائمة صور الذكريات",
+                    "item_label": "صورة ذكرى",
+                    "value": [
+                        {
+                            "banners.image": "https://cdn.salla.sa/mQgZlG/pzOCEw10wCfXeVSpKnL0Ifd1O9ZkTfnZ17RkE14R.jpg",
+                            "banners.url": null,
+                            "banners.title": "ذكريات العطور الكلاسيكية",
+                            "banners.description": "استعد رحلة عبر الزمن مع أروع العطور"
+                        },
+                        {
+                            "banners.image": "https://cdn.salla.sa/mQgZlG/lkyDjYwvWJNmAQoGnLALLcUkm66rCCDbTyVlSGdH.jpg",
+                            "banners.url": null,
+                            "banners.title": "كل عطر يحكي قصة",
+                            "banners.description": "اكتشف العطور التي تروي حكايات الحب"
+                        }
+                    ],
+                    "fields": [
+                        {
+                            "type": "string",
+                            "icon": "sicon-image",
+                            "value": null,
+                            "label": "صورة الذكرى",
+                            "id": "banners.image",
+                            "format": "image",
+                            "required": true,
+                            "placeholder": "اختر صورة تعبر عن الذكرى",
+                            "description": "* المقاس المناسب للصورة هو 640×427 بكسل",
+                            "settings": {
+                                "height": 427,
+                                "width": 640
+                            }
+                        },
+                        {
+                            "type": "items",
+                            "icon": "sicon-link",
+                            "label": "الرابط",
+                            "id": "banners.url",
+                            "value": null,
+                            "description": "اختر الصفحة التي سينتقل إليها الزوار عند النقر",
+                            "required": false,
+                            "format": "variable-list",
+                            "searchable": true,
+                            "source": "custom",
+                            "sources": [
+                                {
+                                    "label": "منتج",
+                                    "key": "products",
+                                    "value": "products"
+                                },
+                                {
+                                    "label": "منتجات مع وسم",
+                                    "key": "products_tags",
+                                    "value": "products_tags"
+                                },
+                                {
+                                    "label": "تصنيف",
+                                    "key": "categories",
+                                    "value": "categories"
+                                },
+                                {
+                                    "label": "ماركة تجارية",
+                                    "key": "brands",
+                                    "value": "brands"
+                                },
+                                {
+                                    "label": "صفحة تعريفية",
+                                    "key": "pages",
+                                    "value": "pages"
+                                },
+                                {
+                                    "label": "مقالة",
+                                    "key": "blog_articles",
+                                    "value": "blog_articles"
+                                },
+                                {
+                                    "label": "تصنيف ضمن المدونة",
+                                    "key": "blog_categories",
+                                    "value": "blog_categories"
+                                },
+                                {
+                                    "label": "التخفيضات",
+                                    "key": "offers_link",
+                                    "value": "offers_link"
+                                },
+                                {
+                                    "label": "الماركات التجارية",
+                                    "key": "brands_link",
+                                    "value": "brands_link"
+                                },
+                                {
+                                    "label": "المدونة",
+                                    "key": "blog_link",
+                                    "value": "blog_link"
+                                },
+                                {
+                                    "label": "رابط خارجي",
+                                    "key": "custom",
+                                    "value": "custom"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "string",
+                            "icon": "sicon-format-text-alt",
+                            "label": "عنوان الذكرى",
+                            "multilanguage": true,
+                            "id": "banners.title",
+                            "value": null,
+                            "required": false,
+                            "format": "text",
+                            "description": "نص يعبر عن جوهر الذكرى",
+                            "placeholder": "مثلاً: ذكريات الخريف...",
+                            "hide": false,
+                            "minLength": 0,
+                            "maxLength": 100
+                        },
+                        {
+                            "type": "string",
+                            "icon": "sicon-typography",
+                            "label": "وصف الذكرى",
+                            "multilanguage": true,
+                            "id": "banners.description",
+                            "value": null,
+                            "description": "قصة قصيرة تعبر عن الذكرى",
+                            "format": "textarea",
+                            "required": false,
+                            "placeholder": "حكاية عطر تعيد لك أجمل اللحظات...",
+                            "minLength": 0,
+                            "maxLength": 255
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "memory-brands-005",
+            "title": {
+                "en": "Memory Perfume Brands",
+                "ar": "ماركات العطور - ذاكرة الأناقة"
+            },
+            "icon": "sicon-award-ribbon",
+            "path": "home.memory-brands",
+            "image": "https://cdn.salla.network/images/themes/raed/preview-images/brands.png?v=1.1",
+            "fields": [
+                {
+                    "type": "static",
+                    "format": "description",
+                    "id": "with-bg",
+                    "value": "<div style='background: linear-gradient(135deg, #8B7355, #C4A882); border-radius: 12px; padding: 20px;'><h4 style='color: #fff; text-align: center;'>🏷️ ماركات صنعت الذكريات 🏷️</h4></div>"
+                },
+                {
+                    "type": "string",
+                    "icon": "sicon-format-text-alt",
+                    "label": "عنوان القسم",
+                    "multilanguage": true,
+                    "id": "title",
+                    "required": false,
+                    "format": "text",
+                    "description": "عنوان يعبر عن ماركات العطور التي صنعت الذكريات",
+                    "placeholder": "مثلاً: ماركات صنعت ذكرياتنا...",
+                    "minLength": 0,
+                    "maxLength": 200,
+                    "value": {
+                        "ar": "ماركات صنعت ذكريات العطور",
+                        "en": "Brands That Made Perfume Memories"
+                    }
+                },
+                {
+                    "type": "items",
+                    "icon": "sicon-keyboard_arrow_down",
+                    "label": "اختر الماركات التجارية",
+                    "id": "brands",
+                    "format": "dropdown-list",
+                    "description": "اختر ماركات العطور التي تريد عرضها",
+                    "selected": [],
+                    "options": [],
+                    "required": true,
+                    "multichoice": true,
+                    "searchable": true,
+                    "source": "brands"
+                }
+            ]
+        },
+        {
+            "key": "memory-testimonials-006",
+            "title": {
+                "en": "Memory Perfume Testimonials",
+                "ar": "آراء عملاء - ذكريات العطور"
+            },
+            "icon": "sicon-chat-bubbles",
+            "path": "home.memory-testimonials",
+            "image": "https://cdn.salla.network/images/themes/raed/preview-images/custom-testimonials.png?v=1.1",
+            "is_default": true,
+            "fields": [
+                {
+                    "type": "static",
+                    "format": "description",
+                    "id": "static-desc",
+                    "value": "<div style='background: linear-gradient(135deg, #5D4037, #8D6E63); border-radius: 12px; padding: 20px; margin-bottom: 20px;'><h4 style='color: #F5E6D3; text-align: center;'>💬 ذكريات عملائنا مع العطور 💬</h4><p style='color: #D4A574; text-align: center;'>استمع إلى قصص عملائنا مع العطور التي صنعت ذكرياتهم</p></div>"
+                },
+                {
+                    "id": "items",
+                    "key": "memory-testimonials-001",
+                    "type": "collection",
+                    "format": "collection",
+                    "label": "آراء العملاء",
+                    "description": "أضف آراء العملاء عن العطور التي صنعت ذكرياتهم",
+                    "labelHTML": null,
+                    "item_label": "رأي عميل",
+                    "icon": "sicon-list-add",
+                    "value": [
+                        {
+                            "items.name": "ندى الحسيني",
+                            "items.avatar": "https://cdn.assets.salla.network/prod/stores/themes/default/assets/images/avatar_female.png",
+                            "items.stars": 5,
+                            "items.text": "عطر ذكرياتي المفضل! كلما أضعه أعود إلى أجمل أيام حياتي ❤️"
+                        },
+                        {
+                            "items.name": "خالد الأحمد",
+                            "items.avatar": "https://cdn.assets.salla.network/prod/stores/themes/default/assets/images/avatar_male.png",
+                            "items.stars": 5,
+                            "items.text": "عطر يحمل ذكريات والدي، رائحة لا تنسى تجعلني أشعر بالقرب منه دائماً 👏"
+                        },
+                        {
+                            "items.name": "سارة المسعودي",
+                            "items.avatar": "https://cdn.assets.salla.network/prod/stores/themes/default/assets/images/avatar_female.png",
+                            "items.stars": 5,
+                            "items.text": "أول عطر اشتريته من متجركم، ومنذ ذلك الحين وأنا أعود لذكريات جميلة مع كل زجاجة 👌"
+                        },
+                        {
+                            "items.name": "عبدالعزيز اليامي",
+                            "items.avatar": "https://cdn.assets.salla.network/prod/stores/themes/default/assets/images/avatar_male.png",
+                            "items.stars": 5,
+                            "items.text": "عطر زواجي! كلما أضعه أعود إلى يوم فرحي، شكراً لكم على هذه الذكرى الجميلة ❤️"
+                        }
+                    ],
+                    "fields": [
+                        {
+                            "id": "items.name",
+                            "key": "memory-name-001",
+                            "type": "string",
+                            "format": "text",
+                            "label": "اسم العميل",
+                            "description": "اسم العميل الذي شارك ذكراه مع العطر",
+                            "labelHTML": null,
+                            "placeholder": "أدخل اسم العميل",
+                            "icon": "sicon-format-text-alt",
+                            "value": null,
+                            "multilanguage": false,
+                            "required": false
+                        },
+                        {
+                            "id": "items.avatar",
+                            "key": "memory-avatar-001",
+                            "type": "string",
+                            "format": "image",
+                            "label": "صورة العميل",
+                            "description": "صورة العميل (يفضل 68×68 بكسل)",
+                            "labelHTML": null,
+                            "placeholder": "https://hostname.com/image.png",
+                            "icon": "sicon-image",
+                            "value": null,
+                            "required": true
+                        },
+                        {
+                            "id": "items.stars",
+                            "type": "number",
+                            "format": "integer",
+                            "label": "عدد النجوم",
+                            "description": "تقييم العميل من 1 إلى 5 نجوم",
+                            "key": "memory-stars-001",
+                            "labelHTML": "من 1 إلى 5",
+                            "placeholder": "5",
+                            "icon": "sicon-star",
+                            "value": 5,
+                            "required": false,
+                            "minimum": 1,
+                            "maximum": 5
+                        },
+                        {
+                            "id": "items.text",
+                            "key": "memory-text-001",
+                            "type": "string",
+                            "format": "textarea",
+                            "label": "قصة الذكرى مع العطر",
+                            "description": "شاركنا قصة العميل مع العطر وكيف صنع ذكرياته",
+                            "labelHTML": null,
+                            "placeholder": "شاركنا قصة الذكرى مع العطر...",
+                            "icon": "sicon-format-text-alt",
+                            "value": null,
+                            "multilanguage": true,
+                            "required": false
+                        }
+                    ],
+                    "required": false,
+                    "minLength": 1,
+                    "maxLength": 30
+                }
+            ]
+        }
+    ],
+    "support_url": "https://github.com/hamato19/the-memory-lane/issues",
+    "description": {
+        "ar": "ثيم 'ذا ميموري لين' - رحلة عبر الذكريات مع أروع العطور. تصميم كلاسيكي أنيق يحاكي الحنين والجمال، مثالي لمتاجر العطور الفاخرة.",
+        "en": "The Memory Lane Theme - A journey through memories with the finest perfumes. A classic elegant design that evokes nostalgia and beauty, perfect for luxury perfume stores."
     }
-  ],
-  "sections": {
-    "home": [
-      "home.stories-carousel",
-      "home.memory-showcase",
-      "home.memory-timeline"
-    ],
-    "product": [
-      "product.bundle-configurator"
-    ],
-    "category": [
-      "category.emotional-filter"
-    ],
-    "cart": [
-      "cart.smart-cart-drawer"
-    ],
-    "checkout": [
-      "checkout.quick-checkout-modal"
-    ]
-  }
 }
