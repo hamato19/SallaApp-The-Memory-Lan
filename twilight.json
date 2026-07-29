@@ -3,17 +3,456 @@
   "theme_name": "The Memory Lane",
   "repo_url": "https://github.com/hamato19/SallaApp-The-Memory-Lan",
   "support_url": "https://github.com/hamato19/SallaApp-The-Memory-Lan",
-  "settings": [],
-  "features": [
-    "component-featured-products"
+  
+  "settings": [
+    {
+      "id": "hero_stories_enabled",
+      "type": "toggle",
+      "label": "تفعيل نظام القصص التفاعلية",
+      "default": true,
+      "help": "عرض قصص المنتجات في أعلى الصفحة الرئيسية"
+    },
+    {
+      "id": "stories_autoplay",
+      "type": "select",
+      "label": "تشغيل القصص تلقائياً",
+      "default": "manual",
+      "options": [
+        { "value": "manual", "label": "يدوي (نقر المستخدم)" },
+        { "value": "auto_3s", "label": "تلقائي كل 3 ثواني" },
+        { "value": "auto_5s", "label": "تلقائي كل 5 ثواني" }
+      ]
+    },
+    {
+      "id": "configurator_enabled",
+      "type": "toggle",
+      "label": "تفعيل مصمم الباقات التفاعلي",
+      "default": true,
+      "help": "السماح للعملاء بتخصيص منتجاتهم بصرياً"
+    },
+    {
+      "id": "configurator_layout",
+      "type": "select",
+      "label": "شكل مصمم الباقات",
+      "default": "split_screen",
+      "options": [
+        { "value": "split_screen", "label": "شاشة منقسمة (يمين/يسار)" },
+        { "value": "step_by_step", "label": "خطوة بخطوة" },
+        { "value": "modal", "label": "نافذة منبثقة" }
+      ]
+    },
+    {
+      "id": "emotional_filter_enabled",
+      "type": "toggle",
+      "label": "تفعيل الفلترة العاطفية",
+      "default": true,
+      "help": "فلترة المنتجات حسب المناسبة أو الحالة المزاجية"
+    },
+    {
+      "id": "emotional_categories",
+      "type": "text",
+      "label": "فئات الفلترة العاطفية",
+      "default": "هدية تخرج, إطلالة صيفية, قهوة صباحية, هدية زفاف, هدية مولود",
+      "help": "أدخل الفئات مفصولة بفواصل"
+    },
+    {
+      "id": "smart_cart_enabled",
+      "type": "toggle",
+      "label": "تفعيل العربة الذكية",
+      "default": true,
+      "help": "عربة تسوق جانبية مع اقتراحات ذكية وشريط تقدم"
+    },
+    {
+      "id": "cart_upsell_count",
+      "type": "number",
+      "label": "عدد اقتراحات الإضافة للعربة",
+      "default": 3,
+      "min": 1,
+      "max": 10,
+      "help": "عدد المنتجات المقترحة لتكملة الطلب"
+    },
+    {
+      "id": "checkout_modal_enabled",
+      "type": "toggle",
+      "label": "تفعيل الدفع السريع بنافذة واحدة",
+      "default": true,
+      "help": "تقليل خطوات الدفع إلى نافذة منبثقة واحدة"
+    },
+    {
+      "id": "primary_color",
+      "type": "color",
+      "label": "اللون الأساسي للثيم",
+      "default": "#6C63FF"
+    },
+    {
+      "id": "secondary_color",
+      "type": "color",
+      "label": "اللون الثانوي",
+      "default": "#FF6B6B"
+    },
+    {
+      "id": "animation_speed",
+      "type": "select",
+      "label": "سرعة الحركات التفاعلية",
+      "default": "medium",
+      "options": [
+        { "value": "slow", "label": "بطيء" },
+        { "value": "medium", "label": "متوسط" },
+        { "value": "fast", "label": "سريع" }
+      ]
+    },
+    {
+      "id": "memory_theme",
+      "type": "select",
+      "label": "طابع الذكريات",
+      "default": "vintage",
+      "options": [
+        { "value": "vintage", "label": "كلاسيكي قديم" },
+        { "value": "modern", "label": "عصري حديث" },
+        { "value": "minimal", "label": "بسيط وأنيق" },
+        { "value": "vibrant", "label": "نابض بالحياة" }
+      ]
+    }
   ],
+
+  "features": [
+    "component-featured-products",
+    "memory-stories",
+    "product-configurator",
+    "emotional-filter",
+    "smart-cart",
+    "quick-checkout"
+  ],
+
   "components": [
     {
       "name": "memory-showcase",
       "title": "عارض الذكريات",
       "icon": "sicon-image-carousel",
       "path": "home.memory-showcase",
-      "fields": []
+      "fields": [
+        {
+          "id": "showcase_title",
+          "type": "text",
+          "label": "عنوان العارض",
+          "default": "رحلتك تبدأ من هنا"
+        },
+        {
+          "id": "showcase_subtitle",
+          "type": "text",
+          "label": "النص الفرعي",
+          "default": "اختر ذاكرتك القادمة"
+        },
+        {
+          "id": "items_per_row",
+          "type": "number",
+          "label": "عدد العناصر في الصف",
+          "default": 4,
+          "min": 2,
+          "max": 6
+        },
+        {
+          "id": "auto_rotate",
+          "type": "toggle",
+          "label": "تدوير تلقائي",
+          "default": true
+        }
+      ]
+    },
+    {
+      "name": "stories-carousel",
+      "title": "دوائر القصص التفاعلية",
+      "icon": "sicon-instagram",
+      "path": "home.stories-carousel",
+      "fields": [
+        {
+          "id": "stories_title",
+          "type": "text",
+          "label": "عنوان القصص",
+          "default": "اكتشف قصص منتجاتنا"
+        },
+        {
+          "id": "max_stories",
+          "type": "number",
+          "label": "عدد القصص الظاهرة",
+          "default": 8,
+          "min": 3,
+          "max": 15
+        },
+        {
+          "id": "story_duration",
+          "type": "number",
+          "label": "مدة عرض القصة (ثانية)",
+          "default": 5,
+          "min": 3,
+          "max": 15
+        },
+        {
+          "id": "show_progress_bar",
+          "type": "toggle",
+          "label": "عرض شريط التقدم للقصة",
+          "default": true
+        },
+        {
+          "id": "auto_play_stories",
+          "type": "toggle",
+          "label": "تشغيل القصص تلقائياً عند الفتح",
+          "default": false
+        }
+      ]
+    },
+    {
+      "name": "bundle-configurator",
+      "title": "مصمم الباقات التفاعلي",
+      "icon": "sicon-cube",
+      "path": "product.bundle-configurator",
+      "fields": [
+        {
+          "id": "configurator_title",
+          "type": "text",
+          "label": "عنوان المصمم",
+          "default": "صمم باقاتك بنفسك"
+        },
+        {
+          "id": "configurator_description",
+          "type": "textarea",
+          "label": "وصف المصمم",
+          "default": "اختر المكونات وشاهد المنتج النهائي يتشكل أمامك"
+        },
+        {
+          "id": "preview_mode",
+          "type": "select",
+          "label": "وضع المعاينة",
+          "default": "3d",
+          "options": [
+            { "value": "2d", "label": "معاينة ثنائية الأبعاد" },
+            { "value": "3d", "label": "معاينة ثلاثية الأبعاد" },
+            { "value": "mixed", "label": "مختلطة" }
+          ]
+        },
+        {
+          "id": "show_price_realtime",
+          "type": "toggle",
+          "label": "تحديث السعر فورياً",
+          "default": true
+        },
+        {
+          "id": "step_labels",
+          "type": "text",
+          "label": "خطوات التصميم",
+          "default": "اختر القاعدة,اختر الإضافات,اختر التغليف,المراجعة النهائية",
+          "help": "أدخل الخطوات مفصولة بفواصل"
+        }
+      ]
+    },
+    {
+      "name": "emotional-filter",
+      "title": "الفلترة العاطفية الذكية",
+      "icon": "sicon-heart",
+      "path": "category.emotional-filter",
+      "fields": [
+        {
+          "id": "filter_title",
+          "type": "text",
+          "label": "عنوان الفلترة",
+          "default": "لمن تبحث عن هدية اليوم؟"
+        },
+        {
+          "id": "filter_placeholder",
+          "type": "text",
+          "label": "نص المساعدة",
+          "default": "اختر المناسبة أو الحالة المزاجية"
+        },
+        {
+          "id": "filter_style",
+          "type": "select",
+          "label": "نمط عرض الفلترة",
+          "default": "chips",
+          "options": [
+            { "value": "chips", "label": "رقائق (Chips)" },
+            { "value": "dropdown", "label": "قائمة منسدلة" },
+            { "value": "cards", "label": "بطاقات مصغرة" }
+          ]
+        },
+        {
+          "id": "show_emotion_icons",
+          "type": "toggle",
+          "label": "عرض أيقونات الحالات المزاجية",
+          "default": true
+        },
+        {
+          "id": "custom_emotions",
+          "type": "text",
+          "label": "حالات مزاجية مخصصة",
+          "default": "🎉 حفلة,💼 عمل,❤️ رومانسي,🌿 استرخاء,🎓 نجاح,👶 مولود",
+          "help": "أدخل الحالات مع أيقونات مفصولة بفواصل"
+        }
+      ]
+    },
+    {
+      "name": "smart-cart-drawer",
+      "title": "عربة التسوق الذكية",
+      "icon": "sicon-shopping-bag",
+      "path": "cart.smart-cart-drawer",
+      "fields": [
+        {
+          "id": "cart_title",
+          "type": "text",
+          "label": "عنوان العربة",
+          "default": "سلة مشترياتك"
+        },
+        {
+          "id": "show_progress_bar",
+          "type": "toggle",
+          "label": "عرض شريط التقدم",
+          "default": true
+        },
+        {
+          "id": "free_shipping_threshold",
+          "type": "number",
+          "label": "الحد الأدنى للتوصيل المجاني",
+          "default": 200,
+          "help": "بالريال السعودي"
+        },
+        {
+          "id": "free_gift_threshold",
+          "type": "number",
+          "label": "الحد الأدنى للهدية المجانية",
+          "default": 150,
+          "help": "بالريال السعودي"
+        },
+        {
+          "id": "upsell_products_count",
+          "type": "number",
+          "label": "عدد منتجات الـ Upsell",
+          "default": 3,
+          "min": 1,
+          "max": 10
+        },
+        {
+          "id": "show_savings_badge",
+          "type": "toggle",
+          "label": "عرض شارة التوفير",
+          "default": true
+        },
+        {
+          "id": "cart_animation",
+          "type": "select",
+          "label": "حركة العربة الجانبية",
+          "default": "slide",
+          "options": [
+            { "value": "slide", "label": "انزلاق" },
+            { "value": "fade", "label": "تلاشي" },
+            { "value": "scale", "label": "تكبير" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "quick-checkout-modal",
+      "title": "الدفع السريع بنافذة واحدة",
+      "icon": "sicon-credit-card",
+      "path": "checkout.quick-checkout-modal",
+      "fields": [
+        {
+          "id": "modal_title",
+          "type": "text",
+          "label": "عنوان النافذة",
+          "default": "إتمام الطلب بسرعة"
+        },
+        {
+          "id": "show_order_summary",
+          "type": "toggle",
+          "label": "عرض ملخص الطلب",
+          "default": true
+        },
+        {
+          "id": "show_payment_options",
+          "type": "toggle",
+          "label": "عرض خيارات الدفع المتاحة",
+          "default": true
+        },
+        {
+          "id": "payment_methods",
+          "type": "select",
+          "label": "طرق الدفع المدعومة",
+          "default": "all",
+          "options": [
+            { "value": "all", "label": "جميع الطرق" },
+            { "value": "apple_pay", "label": "Apple Pay فقط" },
+            { "value": "mada", "label": "مدى فقط" },
+            { "value": "stc_pay", "label": "STC Pay فقط" }
+          ]
+        },
+        {
+          "id": "enable_guest_checkout",
+          "type": "toggle",
+          "label": "السماح بالشراء كزائر",
+          "default": true
+        },
+        {
+          "id": "show_shipping_estimate",
+          "type": "toggle",
+          "label": "عرض تقدير وقت الشحن",
+          "default": true
+        }
+      ]
+    },
+    {
+      "name": "memory-timeline",
+      "title": "خط زمني للذكريات",
+      "icon": "sicon-calendar",
+      "path": "home.memory-timeline",
+      "fields": [
+        {
+          "id": "timeline_title",
+          "type": "text",
+          "label": "عنوان الخط الزمني",
+          "default": "رحلتك معنا"
+        },
+        {
+          "id": "timeline_description",
+          "type": "textarea",
+          "label": "وصف الخط الزمني",
+          "default": "اكتشف كيف تطورت منتجاتنا عبر الزمن"
+        },
+        {
+          "id": "timeline_orientation",
+          "type": "select",
+          "label": "اتجاه الخط الزمني",
+          "default": "vertical",
+          "options": [
+            { "value": "vertical", "label": "رأسي" },
+            { "value": "horizontal", "label": "أفقي" }
+          ]
+        },
+        {
+          "id": "show_animations",
+          "type": "toggle",
+          "label": "تفعيل الحركات عند التمرير",
+          "default": true
+        }
+      ]
     }
-  ]
+  ],
+
+  "sections": {
+    "home": [
+      "home.stories-carousel",
+      "home.memory-showcase",
+      "home.memory-timeline"
+    ],
+    "product": [
+      "product.bundle-configurator"
+    ],
+    "category": [
+      "category.emotional-filter"
+    ],
+    "cart": [
+      "cart.smart-cart-drawer"
+    ],
+    "checkout": [
+      "checkout.quick-checkout-modal"
+    ]
+  }
 }
