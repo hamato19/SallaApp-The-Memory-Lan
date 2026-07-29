@@ -1,33 +1,1947 @@
 /* assets/css/style.css */
+/* ============================================
+   THE MEMORY LANE - ثيم السرد التفاعلي
+   الإصدار: 1.0.0
+   ============================================ */
 
-/* 1. ضبط الخط العام (يمكنك استخدام خطوط سلة المعتمدة) */
-body {
-    font-family: 'Tajawal', sans-serif;
-    color: #2d2d2d;
-    line-height: 1.6;
+/* ============================================
+   1. المتغيرات العامة (CSS Variables)
+   ============================================ */
+:root {
+    /* الألوان الأساسية - يمكن التحكم بها من إعدادات الثيم */
+    --primary-color: #6C63FF;
+    --secondary-color: #FF6B6B;
+    --gold-color: #d4af37;
+    --gold-light: rgba(212, 175, 55, 0.2);
+    --gold-medium: rgba(212, 175, 55, 0.4);
+    
+    /* ألوان الخلفيات */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f6f1;
+    --bg-dark: #1a1a2e;
+    --bg-card: #ffffff;
+    
+    /* ألوان النصوص */
+    --text-primary: #2d2d2d;
+    --text-secondary: #666666;
+    --text-light: #999999;
+    --text-white: #ffffff;
+    
+    /* الظلال */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);
+    --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.3);
+    
+    /* المسافات */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    --spacing-xxl: 5rem;
+    
+    /* الحواف */
+    --border-radius-sm: 8px;
+    --border-radius-md: 12px;
+    --border-radius-lg: 20px;
+    --border-radius-xl: 30px;
+    --border-radius-full: 50%;
+    
+    /* الحركات */
+    --transition-fast: 0.2s ease;
+    --transition-medium: 0.4s ease;
+    --transition-slow: 0.6s ease;
+    
+    /* الخطوط */
+    --font-primary: 'Tajawal', 'Cairo', sans-serif;
+    --font-heading: 'Tajawal', 'Cairo', sans-serif;
+    
+    /* الأحجام */
+    --container-max: 1440px;
+    --header-height: 80px;
 }
 
-/* 2. تنسيق بطاقات الذكريات */
+/* ============================================
+   2. الإعدادات الأساسية
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: var(--font-primary);
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ============================================
+   3. الحاويات العامة
+   ============================================ */
+.container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+}
+
+.section-padding {
+    padding: var(--spacing-xxl) 0;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: var(--gold-color);
+    border-radius: 2px;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-lg);
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-center .section-title::after {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* ============================================
+   4. مكون عارض الذكريات (Memory Showcase)
+   ============================================ */
+.memory-showcase {
+    padding: var(--spacing-xl) 0;
+}
+
+.memory-showcase .showcase-header {
+    margin-bottom: var(--spacing-xl);
+}
+
+.memory-showcase .grid {
+    display: grid;
+    gap: var(--spacing-lg);
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+/* بطاقة الذكريات */
 .memory-card {
-    background: #ffffff;
-    border: 1px solid rgba(212, 175, 55, 0.2); /* لمسة ذهبية خفيفة */
-    transition: all 0.4s ease;
+    background: var(--bg-card);
+    border: 1px solid var(--gold-light);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    transition: all var(--transition-medium);
+    position: relative;
+    cursor: pointer;
 }
 
 .memory-card:hover {
-    border-color: #d4af37; /* لون ذهبي عند المرور */
+    border-color: var(--gold-color);
     transform: translateY(-10px);
+    box-shadow: var(--shadow-gold);
 }
 
-/* 3. تنسيق العناوين داخل المكون */
-.memory-showcase h2 {
-    letter-spacing: 2px;
+.memory-card .card-image {
+    position: relative;
+    overflow: hidden;
+    padding-top: 75%; /* نسبة 4:3 */
+    background: var(--bg-secondary);
+}
+
+.memory-card .card-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+}
+
+.memory-card:hover .card-image img {
+    transform: scale(1.05);
+}
+
+.memory-card .card-badge {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    background: var(--gold-color);
+    color: var(--text-white);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--border-radius-full);
+    font-size: 0.75rem;
+    font-weight: 600;
     text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-/* 4. تنسيق إضافي لضمان التجاوب على الجوال */
-@media (max-width: 768px) {
+.memory-card .card-content {
+    padding: var(--spacing-lg);
+}
+
+.memory-card .card-content h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+    color: var(--text-primary);
+}
+
+.memory-card .card-content .card-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.memory-card .card-content .card-meta i {
+    color: var(--gold-color);
+}
+
+.memory-card .card-content .card-description {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: var(--spacing-md);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.memory-card .card-content .card-price {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.memory-card .card-content .card-price .old-price {
+    font-size: 0.875rem;
+    color: var(--text-light);
+    text-decoration: line-through;
+    margin-left: var(--spacing-sm);
+    font-weight: 400;
+}
+
+.memory-card .card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--spacing-lg);
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all var(--transition-medium);
+}
+
+.memory-card:hover .card-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.memory-card .card-overlay .btn {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    background: var(--gold-color);
+    color: var(--text-white);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.memory-card .card-overlay .btn:hover {
+    background: var(--primary-color);
+    transform: scale(1.02);
+}
+
+/* ============================================
+   5. مكون القصص التفاعلية (Stories Carousel)
+   ============================================ */
+.stories-carousel {
+    padding: var(--spacing-lg) 0;
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius-lg);
+    margin: var(--spacing-lg) 0;
+}
+
+.stories-carousel .stories-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+    padding: 0 var(--spacing-lg);
+}
+
+.stories-carousel .stories-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.stories-carousel .stories-title i {
+    color: var(--gold-color);
+    margin-right: var(--spacing-sm);
+}
+
+.stories-carousel .stories-navigation {
+    display: flex;
+    gap: var(--spacing-sm);
+}
+
+.stories-carousel .stories-navigation button {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--gold-light);
+    border-radius: var(--border-radius-full);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stories-carousel .stories-navigation button:hover {
+    background: var(--gold-color);
+    color: var(--text-white);
+    border-color: var(--gold-color);
+}
+
+/* دوائر القصص */
+.stories-list {
+    display: flex;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+.stories-list::-webkit-scrollbar {
+    height: 4px;
+}
+
+.stories-list::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+.stories-list::-webkit-scrollbar-thumb {
+    background: var(--gold-color);
+    border-radius: 2px;
+}
+
+.story-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all var(--transition-medium);
+}
+
+.story-item:hover {
+    transform: scale(1.05);
+}
+
+.story-item .story-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: var(--border-radius-full);
+    padding: 3px;
+    background: linear-gradient(45deg, var(--gold-color), var(--primary-color));
+    position: relative;
+}
+
+.story-item .story-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: var(--border-radius-full);
+    object-fit: cover;
+    border: 3px solid var(--bg-primary);
+}
+
+.story-item .story-avatar .story-ring {
+    position: absolute;
+    inset: -3px;
+    border-radius: var(--border-radius-full);
+    border: 2px solid transparent;
+    animation: storyPulse 2s ease-in-out infinite;
+}
+
+@keyframes storyPulse {
+    0%, 100% {
+        border-color: var(--gold-light);
+        transform: scale(1);
+    }
+    50% {
+        border-color: var(--gold-color);
+        transform: scale(1.05);
+    }
+}
+
+.story-item .story-name {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    text-align: center;
+    max-width: 80px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.story-item.viewed .story-avatar {
+    background: var(--text-light);
+}
+
+.story-item.viewed .story-avatar .story-ring {
+    animation: none;
+    border-color: var(--text-light);
+}
+
+/* نافذة عرض القصة المنبثقة */
+.story-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.story-modal.active {
+    display: flex;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.story-modal .story-content {
+    position: relative;
+    max-width: 500px;
+    width: 90%;
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    background: var(--bg-primary);
+    box-shadow: var(--shadow-lg);
+}
+
+.story-modal .story-content .story-close {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    background: rgba(0, 0, 0, 0.5);
+    color: var(--text-white);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--border-radius-full);
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: all var(--transition-fast);
+}
+
+.story-modal .story-content .story-close:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: rotate(90deg);
+}
+
+.story-modal .story-content .story-progress {
+    display: flex;
+    gap: 4px;
+    padding: var(--spacing-sm);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 5;
+}
+
+.story-modal .story-content .story-progress .progress-bar {
+    flex: 1;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.story-modal .story-content .story-progress .progress-bar .progress-fill {
+    height: 100%;
+    background: var(--gold-color);
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.1s linear;
+}
+
+.story-modal .story-content .story-image {
+    width: 100%;
+    aspect-ratio: 9/16;
+    object-fit: cover;
+}
+
+.story-modal .story-content .story-info {
+    padding: var(--spacing-lg);
+}
+
+.story-modal .story-content .story-info h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+.story-modal .story-content .story-info p {
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+}
+
+.story-modal .story-content .story-info .btn {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    background: var(--gold-color);
+    color: var(--text-white);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.story-modal .story-content .story-info .btn:hover {
+    background: var(--primary-color);
+}
+
+/* ============================================
+   6. مكون مصمم الباقات (Bundle Configurator)
+   ============================================ */
+.bundle-configurator {
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-xl);
+    margin: var(--spacing-lg) 0;
+}
+
+.bundle-configurator .configurator-header {
+    margin-bottom: var(--spacing-lg);
+}
+
+.bundle-configurator .configurator-header h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.bundle-configurator .configurator-header p {
+    color: var(--text-secondary);
+}
+
+.configurator-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+}
+
+@media (max-width: 992px) {
+    .configurator-wrapper {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+}
+
+/* معاينة المنتج */
+.configurator-preview {
+    background: var(--bg-primary);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    position: relative;
+    border: 1px solid var(--gold-light);
+}
+
+.configurator-preview .preview-image {
+    max-width: 100%;
+    max-height: 350px;
+    object-fit: contain;
+    transition: all var(--transition-medium);
+}
+
+.configurator-preview .preview-badge {
+    position: absolute;
+    top: var(--spacing-md);
+    left: var(--spacing-md);
+    background: var(--gold-color);
+    color: var(--text-white);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--border-radius-full);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.configurator-preview .preview-price {
+    position: absolute;
+    bottom: var(--spacing-md);
+    right: var(--spacing-md);
+    background: var(--bg-dark);
+    color: var(--text-white);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: var(--border-radius-sm);
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.configurator-preview .preview-price .currency {
+    font-size: 0.875rem;
+    margin-left: 2px;
+}
+
+/* خيارات التصميم */
+.configurator-options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.configurator-options .option-group {
+    background: var(--bg-primary);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-lg);
+    border: 1px solid var(--gold-light);
+}
+
+.configurator-options .option-group .option-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-primary);
+}
+
+.configurator-options .option-group .option-label .option-step {
+    display: inline-block;
+    background: var(--gold-color);
+    color: var(--text-white);
+    width: 28px;
+    height: 28px;
+    border-radius: var(--border-radius-full);
+    text-align: center;
+    line-height: 28px;
+    font-size: 0.875rem;
+    margin-right: var(--spacing-sm);
+}
+
+.configurator-options .option-group .option-choices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+}
+
+.configurator-options .option-group .option-choice {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 2px solid var(--gold-light);
+    border-radius: var(--border-radius-sm);
+    background: var(--bg-primary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.configurator-options .option-group .option-choice:hover {
+    border-color: var(--gold-color);
+    background: var(--gold-light);
+}
+
+.configurator-options .option-group .option-choice.active {
+    border-color: var(--gold-color);
+    background: var(--gold-color);
+    color: var(--text-white);
+}
+
+.configurator-options .option-group .option-choice .choice-price {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-left: var(--spacing-xs);
+}
+
+.configurator-options .option-group .option-choice.active .choice-price {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* إضافة إلى السلة */
+.configurator-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+.configurator-actions .btn-primary {
+    flex: 1;
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: var(--gold-color);
+    color: var(--text-white);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.configurator-actions .btn-primary:hover {
+    background: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.configurator-actions .btn-secondary {
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: transparent;
+    color: var(--text-primary);
+    border: 2px solid var(--gold-light);
+    border-radius: var(--border-radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.configurator-actions .btn-secondary:hover {
+    border-color: var(--gold-color);
+    background: var(--gold-light);
+}
+
+/* ============================================
+   7. مكون الفلترة العاطفية (Emotional Filter)
+   ============================================ */
+.emotional-filter {
+    padding: var(--spacing-xl) 0;
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius-lg);
+    margin: var(--spacing-lg) 0;
+}
+
+.emotional-filter .filter-header {
+    margin-bottom: var(--spacing-lg);
+    padding: 0 var(--spacing-lg);
+}
+
+.emotional-filter .filter-header h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.emotional-filter .filter-header h2 i {
+    color: var(--gold-color);
+    margin-right: var(--spacing-sm);
+}
+
+.emotional-filter .filter-header p {
+    color: var(--text-secondary);
+}
+
+/* أزرار الفلترة على شكل رقائق */
+.filter-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    padding: 0 var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+.filter-chip {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border: 2px solid var(--gold-light);
+    border-radius: var(--border-radius-full);
+    background: var(--bg-primary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: 0.95rem;
+    color: var(--text-primary);
+}
+
+.filter-chip:hover {
+    border-color: var(--gold-color);
+    background: var(--gold-light);
+    transform: translateY(-2px);
+}
+
+.filter-chip.active {
+    background: var(--gold-color);
+    border-color: var(--gold-color);
+    color: var(--text-white);
+}
+
+.filter-chip .chip-icon {
+    font-size: 1.2rem;
+}
+
+.filter-chip .chip-count {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.1rem 0.5rem;
+    border-radius: var(--border-radius-full);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.filter-chip.active .chip-count {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* نتائج الفلترة */
+.filter-results {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    padding: 0 var(--spacing-lg);
+}
+
+.filter-results .result-item {
+    background: var(--bg-primary);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    border: 1px solid var(--gold-light);
+    transition: all var(--transition-medium);
+    animation: fadeInUp 0.4s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.filter-results .result-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--gold-color);
+}
+
+.filter-results .result-item .result-image {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+.filter-results .result-item .result-info {
+    padding: var(--spacing-md);
+}
+
+.filter-results .result-item .result-info h4 {
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+}
+
+.filter-results .result-item .result-info .result-price {
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.filter-results .result-item .result-info .result-tag {
+    display: inline-block;
+    background: var(--gold-light);
+    color: var(--gold-color);
+    padding: 0.1rem 0.5rem;
+    border-radius: var(--border-radius-full);
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: var(--spacing-xs);
+}
+
+/* ============================================
+   8. مكون العربة الذكية (Smart Cart Drawer)
+   ============================================ */
+.cart-drawer {
+    position: fixed;
+    top: 0;
+    right: -480px;
+    width: 450px;
+    max-width: 90vw;
+    height: 100vh;
+    background: var(--bg-primary);
+    z-index: 9998;
+    transition: right var(--transition-slow);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-drawer.open {
+    right: 0;
+}
+
+.cart-drawer .drawer-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity var(--transition-medium);
+}
+
+.cart-drawer.open .drawer-overlay {
+    opacity: 1;
+}
+
+.cart-drawer .drawer-header {
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--gold-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-drawer .drawer-header h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.cart-drawer .drawer-header h3 .cart-count {
+    background: var(--gold-color);
+    color: var(--text-white);
+    padding: 0.1rem 0.5rem;
+    border-radius: var(--border-radius-full);
+    font-size: 0.75rem;
+    margin-left: var(--spacing-sm);
+}
+
+.cart-drawer .drawer-header .drawer-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: all var(--transition-fast);
+}
+
+.cart-drawer .drawer-header .drawer-close:hover {
+    color: var(--text-primary);
+    transform: rotate(90deg);
+}
+
+/* شريط التقدم */
+.cart-drawer .progress-section {
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: var(--bg-secondary);
+}
+
+.cart-drawer .progress-section .progress-text {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.cart-drawer .progress-section .progress-text .progress-goal {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.cart-drawer .progress-section .progress-bar-track {
+    width: 100%;
+    height: 8px;
+    background: var(--gold-light);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.cart-drawer .progress-section .progress-bar-track .progress-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--gold-color), var(--primary-color));
+    border-radius: 4px;
+    transition: width var(--transition-slow);
+    width: 0%;
+}
+
+.cart-drawer .progress-section .progress-message {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: var(--spacing-xs);
+    text-align: center;
+}
+
+.cart-drawer .progress-section .progress-message i {
+    color: var(--gold-color);
+    margin-right: var(--spacing-xs);
+}
+
+/* قائمة المنتجات في العربة */
+.cart-drawer .drawer-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--spacing-lg);
+}
+
+.cart-drawer .drawer-items .empty-cart {
+    text-align: center;
+    padding: var(--spacing-xl) 0;
+    color: var(--text-secondary);
+}
+
+.cart-drawer .drawer-items .empty-cart i {
+    font-size: 3rem;
+    color: var(--gold-light);
+    margin-bottom: var(--spacing-md);
+}
+
+.cart-drawer .drawer-items .cart-item {
+    display: flex;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) 0;
+    border-bottom: 1px solid var(--gold-light);
+    align-items: center;
+}
+
+.cart-drawer .drawer-items .cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-drawer .drawer-items .cart-item .item-image {
+    width: 70px;
+    height: 70px;
+    border-radius: var(--border-radius-sm);
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.cart-drawer .drawer-items .cart-item .item-details {
+    flex: 1;
+}
+
+.cart-drawer .drawer-items .cart-item .item-details .item-name {
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.cart-drawer .drawer-items .cart-item .item-details .item-variant {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.cart-drawer .drawer-items .cart-item .item-details .item-price {
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.cart-drawer .drawer-items .cart-item .item-quantity {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.cart-drawer .drawer-items .cart-item .item-quantity button {
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--gold-light);
+    border-radius: var(--border-radius-full);
+    background: var(--bg-primary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.cart-drawer .drawer-items .cart-item .item-quantity button:hover {
+    background: var(--gold-color);
+    color: var(--text-white);
+    border-color: var(--gold-color);
+}
+
+.cart-drawer .drawer-items .cart-item .item-quantity span {
+    min-width: 24px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.cart-drawer .drawer-items .cart-item .item-remove {
+    background: none;
+    border: none;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    padding: var(--spacing-sm);
+}
+
+.cart-drawer .drawer-items .cart-item .item-remove:hover {
+    color: var(--secondary-color);
+    transform: scale(1.2);
+}
+
+/* اقتراحات التكملة (Upsell) */
+.cart-drawer .upsell-section {
+    padding: var(--spacing-lg);
+    border-top: 1px solid var(--gold-light);
+    background: var(--bg-secondary);
+}
+
+.cart-drawer .upsell-section .upsell-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+}
+
+.cart-drawer .upsell-section .upsell-title i {
+    color: var(--gold-color);
+    margin-right: var(--spacing-xs);
+}
+
+.cart-drawer .upsell-section .upsell-products {
+    display: flex;
+    gap: var(--spacing-sm);
+    overflow-x: auto;
+    padding-bottom: var(--spacing-sm);
+}
+
+.cart-drawer .upsell-section .upsell-products .upsell-item {
+    flex-shrink: 0;
+    width: 100px;
+    text-align: center;
+    background: var(--bg-primary);
+    border-radius: var(--border-radius-sm);
+    padding: var(--spacing-sm);
+    border: 1px solid var(--gold-light);
+    transition: all var(--transition-fast);
+    cursor: pointer;
+}
+
+.cart-drawer .upsell-section .upsell-products .upsell-item:hover {
+    border-color: var(--gold-color);
+    transform: translateY(-3px);
+}
+
+.cart-drawer .upsell-section .upsell-products .upsell-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: var(--border-radius-sm);
+}
+
+.cart-drawer .upsell-section .upsell-products .upsell-item .upsell-name {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    margin: var(--spacing-xs) 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.cart-drawer .upsell-section .upsell-products .upsell-item .upsell-price {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.cart-drawer .upsell-section .upsell-products .upsell-item .upsell-add {
+    font-size: 0.6rem;
+    background: var(--gold-color);
+    color: var(--text-white);
+    border: none;
+    padding: 0.15rem 0.5rem;
+    border-radius: var(--border-radius-full);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.cart-drawer .upsell-section .upsell-products .upsell-item .upsell-add:hover {
+    background: var(--primary-color);
+}
+
+/* إجمالي العربة */
+.cart-drawer .drawer-footer {
+    padding: var(--spacing-lg);
+    border-top: 2px solid var(--gold-color);
+    background: var(--bg-primary);
+}
+
+.cart-drawer .drawer-footer .cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: var(--spacing-md);
+}
+
+.cart-drawer .drawer-footer .cart-total .total-amount {
+    color: var(--primary-color);
+}
+
+.cart-drawer .drawer-footer .checkout-btn {
+    width: 100%;
+    padding: var(--spacing-md);
+    background: var(--gold-color);
+    color: var(--text-white);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.cart-drawer .drawer-footer .checkout-btn:hover {
+    background: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* ============================================
+   9. مكون الدفع السريع (Quick Checkout Modal)
+   ============================================ */
+.checkout-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 99999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-lg);
+}
+
+.checkout-modal.active {
+    display: flex;
+    animation: fadeIn 0.3s ease;
+}
+
+.checkout-modal .checkout-content {
+    background: var(--bg-primary);
+    border-radius: var(--border-radius-lg);
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+    animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.checkout-modal .checkout-content .checkout-header {
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--gold-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+}
+
+.checkout-modal .checkout-content .checkout-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.checkout-modal .checkout-content .checkout-header .checkout-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: all var(--transition-fast);
+}
+
+.checkout-modal .checkout-content .checkout-header .checkout-close:hover {
+    color: var(--text-primary);
+    transform: rotate(90deg);
+}
+
+.checkout-modal .checkout-content .checkout-body {
+    padding: var(--spacing-lg);
+}
+
+.checkout-modal .checkout-content .checkout-body .form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.checkout-modal .checkout-content .checkout-body .form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+    font-size: 0.9rem;
+}
+
+.checkout-modal .checkout-content .checkout-body .form-group input,
+.checkout-modal .checkout-content .checkout-body .form-group select {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--gold-light);
+    border-radius: var(--border-radius-sm);
+    font-size: 1rem;
+    transition: all var(--transition-fast);
+    font-family: var(--font-primary);
+}
+
+.checkout-modal .checkout-content .checkout-body .form-group input:focus,
+.checkout-modal .checkout-content .checkout-body .form-group select:focus {
+    outline: none;
+    border-color: var(--gold-color);
+    box-shadow: 0 0 0 3px var(--gold-light);
+}
+
+.checkout-modal .checkout-content .checkout-body .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+}
+
+.checkout-modal .checkout-content .checkout-body .order-summary {
+    background: var(--bg-secondary);
+    border-radius: var(--border-radius-sm);
+    padding: var(--spacing-md);
+    margin: var(--spacing-lg) 0;
+}
+
+.checkout-modal .checkout-content .checkout-body .order-summary h4 {
+    font-weight: 700;
+    margin-bottom: var(--spacing-sm);
+}
+
+.checkout-modal .checkout-content .checkout-body .order-summary .summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--spacing-xs) 0;
+    font-size: 0.95rem;
+}
+
+.checkout-modal .checkout-content .checkout-body .order-summary .summary-total {
+    display: flex;
+    justify-content: space-between;
+    padding-top: var(--spacing-sm);
+    border-top: 2px solid var(--gold-color);
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-top: var(--spacing-xs);
+}
+
+.checkout-modal .checkout-content .checkout-body .payment-methods {
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+    margin: var(--spacing-md) 0;
+}
+
+.checkout-modal .checkout-content .checkout-body .payment-methods .payment-option {
+    flex: 1;
+    min-width: 80px;
+    padding: var(--spacing-sm);
+    border: 2px solid var(--gold-light);
+    border-radius: var(--border-radius-sm);
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.checkout-modal .checkout-content .checkout-body .payment-methods .payment-option:hover {
+    border-color: var(--gold-color);
+}
+
+.checkout-modal .checkout-content .checkout-body .payment-methods .payment-option.active {
+    border-color: var(--gold-color);
+    background: var(--gold-light);
+}
+
+.checkout-modal .checkout-content .checkout-body .payment-methods .payment-option img {
+    max-height: 30px;
+    width: auto;
+}
+
+.checkout-modal .checkout-content .checkout-body .payment-methods .payment-option .payment-name {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    display: block;
+    margin-top: 2px;
+}
+
+.checkout-modal .checkout-content .checkout-body .checkout-submit {
+    width: 100%;
+    padding: var(--spacing-md);
+    background: var(--gold-color);
+    color: var(--text-white);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.checkout-modal .checkout-content .checkout-body .checkout-submit:hover {
+    background: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.checkout-modal .checkout-content .checkout-body .checkout-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ============================================
+   10. مكون الخط الزمني (Memory Timeline)
+   ============================================ */
+.memory-timeline {
+    padding: var(--spacing-xl) 0;
+    position: relative;
+}
+
+.memory-timeline .timeline-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.memory-timeline .timeline-line {
+    position: relative;
+    padding: var(--spacing-lg) 0;
+}
+
+.memory-timeline .timeline-line::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--gold-light);
+    transform: translateX(-50%);
+}
+
+/* الوضع الرأسي */
+.timeline-vertical .timeline-item {
+    display: flex;
+    justify-content: flex-end;
+    padding: var(--spacing-lg) 0;
+    position: relative;
+    width: 50%;
+}
+
+.timeline-vertical .timeline-item:nth-child(odd) {
+    padding-right: var(--spacing-xl);
+    text-align: right;
+}
+
+.timeline-vertical .timeline-item:nth-child(even) {
+    margin-left: 50%;
+    padding-left: var(--spacing-xl);
+    text-align: left;
+}
+
+.timeline-vertical .timeline-item .timeline-dot {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--gold-color);
+    border-radius: var(--border-radius-full);
+    border: 4px solid var(--bg-primary);
+    box-shadow: 0 0 0 3px var(--gold-color);
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.timeline-vertical .timeline-item:nth-child(odd) .timeline-dot {
+    right: -10px;
+}
+
+.timeline-vertical .timeline-item:nth-child(even) .timeline-dot {
+    left: -10px;
+}
+
+.timeline-vertical .timeline-item .timeline-content {
+    background: var(--bg-primary);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-lg);
+    border: 1px solid var(--gold-light);
+    transition: all var(--transition-medium);
+    width: 100%;
+}
+
+.timeline-vertical .timeline-item .timeline-content:hover {
+    border-color: var(--gold-color);
+    box-shadow: var(--shadow-md);
+}
+
+.timeline-vertical .timeline-item .timeline-content .timeline-year {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--gold-color);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.timeline-vertical .timeline-item .timeline-content h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: var(--spacing-xs) 0;
+}
+
+.timeline-vertical .timeline-item .timeline-content p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.timeline-vertical .timeline-item .timeline-content .timeline-image {
+    width: 100%;
+    border-radius: var(--border-radius-sm);
+    margin-top: var(--spacing-sm);
+}
+
+/* الوضع الأفقي */
+.timeline-horizontal {
+    display: flex;
+    gap: var(--spacing-lg);
+    overflow-x: auto;
+    padding: var(--spacing-lg) 0;
+    scroll-behavior: smooth;
+}
+
+.timeline-horizontal .timeline-item {
+    flex: 0 0 300px;
+    background: var(--bg-primary);
+    border-radius: var(--border-radius-md);
+    padding: var(--spacing-lg);
+    border: 1px solid var(--gold-light);
+    transition: all var(--transition-medium);
+    position: relative;
+}
+
+.timeline-horizontal .timeline-item:hover {
+    border-color: var(--gold-color);
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-gold);
+}
+
+.timeline-horizontal .timeline-item .timeline-dot {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    background: var(--gold-color);
+    border-radius: var(--border-radius-full);
+    border: 4px solid var(--bg-primary);
+    box-shadow: 0 0 0 3px var(--gold-color);
+    transform: translateX(-50%);
+}
+
+/* ============================================
+   11. أدوات مساعدة
+   ============================================ */
+/* شارة التوفير */
+.savings-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    background: #e8f5e9;
+    color: #2e7d32;
+    padding: 0.2rem 0.75rem;
+    border-radius: var(--border-radius-full);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.savings-badge i {
+    font-size: 0.85rem;
+}
+
+/* حالة التحميل */
+.loading-spinner {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    border: 3px solid var(--gold-light);
+    border-top-color: var(--gold-color);
+    border-radius: var(--border-radius-full);
+    animation: spinnerRotate 0.8s linear infinite;
+}
+
+@keyframes spinnerRotate {
+    to { transform: rotate(360deg); }
+}
+
+/* إشعارات */
+.notification {
+    position: fixed;
+    top: var(--spacing-lg);
+    right: var(--spacing-lg);
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: var(--bg-primary);
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--shadow-lg);
+    border-right: 4px solid var(--gold-color);
+    z-index: 999999;
+    transform: translateX(120%);
+    transition: transform var(--transition-medium);
+    max-width: 400px;
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+.notification.success {
+    border-right-color: #4caf50;
+}
+
+.notification.error {
+    border-right-color: var(--secondary-color);
+}
+
+.notification .notification-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.notification .notification-message {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* ============================================
+   12. التجاوب مع الأجهزة المختلفة
+   ============================================ */
+
+/* أجهزة لوحية (Tablets) */
+@media (max-width: 992px) {
+    .section-title {
+        font-size: 2rem;
+    }
+    
     .memory-showcase .grid {
-        gap: 1rem;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: var(--spacing-md);
+    }
+    
+    .filter-results {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+    
+    .checkout-modal .checkout-content .checkout-body .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .cart-drawer {
+        width: 400px;
+    }
+}
+
+/* أجهزة جوال كبيرة (Large Phones) */
+@media (max-width: 768px) {
+    :root {
+        --spacing-xl: 2rem;
+        --spacing-xxl: 3rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .section-padding {
+        padding: var(--spacing-xl) 0;
+    }
+    
+    .memory-showcase .grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: var(--spacing-sm);
+    }
+    
+    .memory-card .card-content {
+        padding: var(--spacing-md);
+    }
+    
+    .memory-card .card-content h3 {
+        font-size: 1rem;
+    }
+    
+    .stories-list {
+        gap: var(--spacing-sm);
+        padding: var(--spacing-sm);
+    }
+    
+    .story-item .story-avatar {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .story-item .story-name {
+        font-size: 0.7rem;
+        max-width: 60px;
+    }
+    
+    .bundle-configurator {
+        padding: var(--spacing-lg);
+    }
+    
+    .configurator-actions {
+        flex-direction: column;
+    }
+    
+    .filter-chips {
+        gap: var(--spacing-xs);
+        padding: 0 var(--spacing-md);
+    }
+    
+    .filter-chip {
+        padding: var(--spacing-xs) var(--spacing-md);
+        font-size: 0.85rem;
+    }
+    
+    .filter-results {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: var(--spacing-sm);
+        padding: 0 var(--spacing-md);
+    }
+    
+    .cart-drawer {
+        width: 100%;
+        max-width: 100%;
+        right: -100%;
+    }
+    
+    .cart-drawer.open {
+        right: 0;
+    }
+    
+    .timeline-vertical .timeline-item {
+        width: 100%;
+        padding-left: var(--spacing-xl);
+        padding-right: 0;
+        text-align: left;
+    }
+    
+    .timeline-vertical .timeline-item:nth-child(odd) {
+        padding-right: 0;
+        text-align: left;
+    }
+    
+    .timeline-vertical .timeline-item .timeline-dot {
+        left: -10px;
+        right: auto;
+    }
+    
+    .timeline-vertical .timeline-item:nth-child(odd) .timeline-dot {
+        right: auto;
+        left: -10px;
+    }
+    
+    .timeline-vertical .timeline-line::before {
+        left: 0;
+    }
+    
+    .checkout-modal {
+        padding: var(--spacing-md);
+    }
+    
+    .checkout-modal .checkout-content {
+        border-radius: var(--border-radius-md);
+    }
+    
+    .checkout-modal .checkout-content .checkout-body .payment-methods .payment-option {
+        min-width: 60px;
+        padding: var(--spacing-xs);
+    }
+}
+
+/* أجهزة جوال صغيرة (Small Phones) */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 var(--spacing-md);
+    }
+    
+    .memory-showcase .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-xs);
+    }
+    
+    .memory-card .card-content .card-description {
+        display: none;
+    }
+    
+    .memory-card .card-content .card-meta {
+        font-size: 0.7rem;
+    }
+    
+    .filter-results {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-xs);
+    }
+    
+    .filter-results .result-item .result-info {
+        padding: var(--spacing-xs);
+    }
+    
+    .filter-results .result-item .result-info h4 {
+        font-size: 0.85rem;
+    }
+    
+    .configurator-preview {
+        min-height: 250px;
+    }
+    
+    .configurator-options .option-group .option-choice {
+        font-size: 0.8rem;
+        padding: var(--spacing-xs) var(--spacing-sm);
+    }
+    
+    .cart-drawer .drawer-items .cart-item .item-image {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .cart-drawer .upsell-section .upsell-products .upsell-item {
+        width: 80px;
+    }
+    
+    .cart-drawer .upsell-section .upsell-products .upsell-item img {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* ============================================
+   13. دعم الوضع المظلم (Dark Mode)
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-primary: #1a1a2e;
+        --bg-secondary: #16213e;
+        --text-primary: #f0f0f0;
+        --text-secondary: #b0b0b0;
+        --text-light: #888888;
+        --bg-card: #1e2a4a;
+        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+        --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.4);
+        --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.5);
+        --shadow-gold: 0 4px 20px rgba(212, 175, 55, 0.2);
+    }
+    
+    .memory-card {
+        background: var(--bg-card);
+    }
+    
+    .configurator-options .option-group {
+        background: var(--bg-card);
+    }
+    
+    .filter-chip {
+        background: var(--bg-card);
+    }
+    
+    .filter-chip:hover {
+        background: var(--gold-color);
+    }
+    
+    .filter-chip.active {
+        background: var(--gold-color);
+    }
+    
+    .filter-results .result-item {
+        background: var(--bg-card);
+    }
+    
+    .cart-drawer {
+        background: var(--bg-card);
+    }
+    
+    .checkout-modal .checkout-content {
+        background: var(--bg-card);
+    }
+    
+    .checkout-modal .checkout-content .checkout-header {
+        background: var(--bg-secondary);
+    }
+    
+    .checkout-modal .checkout-content .checkout-body .order-summary {
+        background: var(--bg-secondary);
+    }
+    
+    .timeline-horizontal .timeline-item {
+        background: var(--bg-card);
+    }
+    
+    .timeline-vertical .timeline-item .timeline-content {
+        background: var(--bg-card);
+    }
+    
+    .cart-drawer .drawer-items .cart-item {
+        border-color: rgba(212, 175, 55, 0.15);
+    }
+    
+    .cart-drawer .drawer-header {
+        border-color: rgba(212, 175, 55, 0.15);
+    }
+    
+    .cart-drawer .upsell-section .upsell-products .upsell-item {
+        background: var(--bg-card);
+    }
+}
+
+/* ============================================
+   14. الطباعة (Print)
+   ============================================ */
+@media print {
+    .stories-carousel,
+    .bundle-configurator,
+    .emotional-filter,
+    .cart-drawer,
+    .checkout-modal,
+    .story-modal {
+        display: none !important;
     }
 }
