@@ -1,0 +1,16 @@
+{% include 'layouts/header.twig' %}
+
+<section class="hero-section">
+    <div class="container">
+        <h1>{{ settings.store_name|default('مرحباً في The Memory Lane') }}</h1>
+        <p>اكتشف ذاكرتك القادمة</p>
+    </div>
+</section>
+
+{% if settings.hero_stories_enabled|default(true) %}
+    {% component 'stories-carousel' %}
+{% endif %}
+
+{% component 'memory-showcase' %}
+
+{% include 'layouts/footer.twig' %}
